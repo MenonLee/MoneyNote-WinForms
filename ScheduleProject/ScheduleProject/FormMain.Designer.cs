@@ -56,7 +56,7 @@
             lblToday.Size = new Size(400, 30);
             lblToday.TabIndex = 1;
             lblToday.Text = "오늘 날짜: ";
-            lblToday.TextAlign = ContentAlignment.MiddleCenter;            
+            lblToday.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // buttonAddTask
             // 
@@ -87,7 +87,7 @@
             buttonEditTask.Name = "buttonEditTask";
             buttonEditTask.Size = new Size(180, 45);
             buttonEditTask.TabIndex = 4;
-            buttonEditTask.Text = "수정 / 삭제";
+            buttonEditTask.Text = "일정 관리";
             buttonEditTask.UseVisualStyleBackColor = true;
             buttonEditTask.Click += buttonEditTask_Click;
             // 

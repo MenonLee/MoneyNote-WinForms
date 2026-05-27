@@ -21,7 +21,7 @@ namespace ScheduleProject
 
         private void buttonEditTask_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("수정 / 삭제 화면 연결 예정");
+            MessageBox.Show("일정 관리 화면 연결 예정");
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
