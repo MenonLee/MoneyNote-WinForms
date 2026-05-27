@@ -31,7 +31,11 @@ Current Branch 클릭
 브랜치 이름은 이렇게 (각자 맡은 역할대로 하나씩만 생성해주세요)
 
 feature/database
+
 feature/add-task
+
 feature/task-list
+
 feature/edit-search-stats
+
 feature/main-ui
