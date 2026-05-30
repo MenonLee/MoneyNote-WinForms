@@ -47,7 +47,7 @@
             txtTitle.Name = "txtTitle";
             txtTitle.Size = new Size(438, 23);
             txtTitle.TabIndex = 0;
-            txtTitle.Text = "일정 제목";
+            txtTitle.Text = "제목을 입력하세요.";
             // 
             // txtDescription
             // 
@@ -56,7 +56,7 @@
             txtDescription.Name = "txtDescription";
             txtDescription.Size = new Size(438, 99);
             txtDescription.TabIndex = 1;
-            txtDescription.Text = "일정내용";
+            txtDescription.Text = "내용을 입력하세요.";
             // 
             // dtpDueDate
             // 
