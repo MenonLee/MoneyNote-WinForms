@@ -8,7 +8,7 @@ namespace ScheduleProject
 
             lblToday.Text = "오늘 날짜: " + DateTime.Now.ToString("yyyy-MM-dd");
         }
-  
+
         private void buttonAddTask_Click(object sender, EventArgs e)
         {
             MessageBox.Show("일정 등록 화면 연결 예정");
@@ -37,6 +37,6 @@ namespace ScheduleProject
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }      
+        }
     }
 }
