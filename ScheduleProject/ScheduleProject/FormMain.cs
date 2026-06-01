@@ -25,6 +25,16 @@ namespace ScheduleProject
             ConfigureMenuHover(buttonExit, lblExitTitle, lblExitDesc);
         }
 
+        private void ResetMenuColors()
+        {
+            SetMenuColor(buttonAddTask, new[] { lblAddTaskTitle, lblAddTaskDesc }, menuNormalColor);
+            SetMenuColor(buttonTaskList, new[] { lblTaskListTitle, lblTaskListDesc }, menuNormalColor);
+            SetMenuColor(buttonEditTask, new[] { lblEditTaskTitle, lblEditTaskDesc }, menuNormalColor);
+            SetMenuColor(buttonSearch, new[] { lblSearchTitle, lblSearchDesc }, menuNormalColor);
+            SetMenuColor(buttonStats, new[] { lblStatsTitle, lblStatsDesc }, menuNormalColor);
+            SetMenuColor(buttonExit, new[] { lblExitTitle, lblExitDesc }, menuNormalColor);
+        }
+
         private void ConfigureMenuHover(Button button, params Label[] labels)
         {
             button.FlatAppearance.MouseOverBackColor = menuHoverColor;
@@ -82,31 +92,37 @@ namespace ScheduleProject
 
         private void buttonAddTask_Click(object sender, EventArgs e)
         {
+            ResetMenuColors();
             MessageBox.Show("일정 등록 화면 연결 예정");
         }
 
         private void buttonTaskList_Click(object sender, EventArgs e)
         {
+            ResetMenuColors();
             MessageBox.Show("일정 목록 화면 연결 예정");
         }
 
         private void buttonEditTask_Click(object sender, EventArgs e)
         {
+            ResetMenuColors();
             MessageBox.Show("일정 관리 화면 연결 예정");
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            ResetMenuColors();
             MessageBox.Show("검색 화면 연결 예정");
         }
 
         private void buttonStats_Click(object sender, EventArgs e)
         {
+            ResetMenuColors();
             MessageBox.Show("통계 화면 연결 예정");
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            ResetMenuColors();
             Application.Exit();
         }
     }
