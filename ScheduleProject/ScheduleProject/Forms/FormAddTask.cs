@@ -1,10 +1,6 @@
 ﻿using ScheduleProject.Models;
+using ScheduleProject.Data; // ✅ 3번 문제 해결: DB 헬퍼를 찾기 위한 using 추가
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace ScheduleProject.Forms
@@ -18,38 +14,37 @@ namespace ScheduleProject.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // 1. 입력값 검사 (제목을 안 적었는지 확인)
+            // 1. 입력값 검사 (제목)
             if (string.IsNullOrWhiteSpace(txtTitle.Text))
             {
                 MessageBox.Show("일정 제목을 입력해주세요!", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // 더 이상 진행하지 않고 멈춤
+                return; 
             }
 
-            // 2. 카테고리를 선택 안 했는지 확인
+            // 2. 카테고리 선택 검사
             if (cbCategory.SelectedIndex == -1)
             {
                 MessageBox.Show("카테고리를 선택해주세요!", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 3. TaskItem 객체 생성 (화면에 입력된 값들 담기)
+            // 3. TaskItem 객체 생성 (데이터 타입 에러 수정 완료!)
             TaskItem newTask = new TaskItem
             {
                 Title = txtTitle.Text,
                 Description = txtDescription.Text,
-                DueDate = dtpDueDate.Value.ToString("yyyy-MM-dd"), // 날짜를 글자로 변환
+                DueDate = dtpDueDate.Value, // ✅ 1번 문제 해결: ToString() 제거하고 DateTime 값 그대로 전달
                 Category = cbCategory.SelectedItem.ToString(),
-                // 중요도를 선택 안 했으면 "보통"으로 기본값 처리
                 Priority = cbPriority.SelectedIndex != -1 ? cbPriority.SelectedItem.ToString() : "보통",
-                IsCompleted = 0 // 처음 만드는 거니까 미완료 상태(0)
+                IsCompleted = false // ✅ 2번 문제 해결: 숫자 0 대신 bool 타입인 false 전달
             };
 
-            // 4. DatabaseHelper.AddTask(task) 호출
+            // 4. DB 추가 호출
             DatabaseHelper.AddTask(newTask);
 
-            // 5. 등록 완료 메시지 출력 및 창 닫기
+            // 5. 완료 메시지 및 창 닫기
             MessageBox.Show("일정이 성공적으로 등록되었습니다.", "등록 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close(); // 현재 등록 창 닫기
+            this.Close(); 
         }
     }
 }
