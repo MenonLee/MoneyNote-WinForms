@@ -32,20 +32,17 @@ namespace ScheduleProject
             lblToday = new Label();
             lblSubtitle = new Label();
             lblStatus = new Label();
-            buttonAddTask = new Button();
-            buttonTaskList = new Button();
-            buttonEditTask = new Button();
-            buttonSearch = new Button();
+            buttonAddExpense = new Button();
+            buttonExpenseList = new Button();
+            buttonManageExpense = new Button();
             buttonStats = new Button();
             buttonExit = new Button();
-            lblAddTaskTitle = new Label();
-            lblAddTaskDesc = new Label();
-            lblTaskListTitle = new Label();
-            lblTaskListDesc = new Label();
-            lblEditTaskTitle = new Label();
-            lblEditTaskDesc = new Label();
-            lblSearchTitle = new Label();
-            lblSearchDesc = new Label();
+            lblAddExpenseTitle = new Label();
+            lblAddExpenseDesc = new Label();
+            lblExpenseListTitle = new Label();
+            lblExpenseListDesc = new Label();
+            lblManageExpenseTitle = new Label();
+            lblManageExpenseDesc = new Label();
             lblStatsTitle = new Label();
             lblStatsDesc = new Label();
             lblExitTitle = new Label();
@@ -55,13 +52,13 @@ namespace ScheduleProject
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("맑은 고딕", 22F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblTitle.Font = new Font("맑은 고딕", 24F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblTitle.ForeColor = Color.FromArgb(17, 24, 39);
             lblTitle.Location = new Point(58, 42);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(363, 41);
+            lblTitle.Size = new Size(199, 45);
             lblTitle.TabIndex = 0;
-            lblTitle.Text = "개인 일정 및 과제 관리";
+            lblTitle.Text = "MoneyNote";
             // 
             // lblToday
             // 
@@ -81,85 +78,72 @@ namespace ScheduleProject
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
-            lblSubtitle.Location = new Point(62, 91);
+            lblSubtitle.Location = new Point(62, 96);
             lblSubtitle.Name = "lblSubtitle";
-            lblSubtitle.Size = new Size(361, 19);
+            lblSubtitle.Size = new Size(370, 19);
             lblSubtitle.TabIndex = 1;
-            lblSubtitle.Text = "일정 등록, 조회, 관리, 검색, 통계를 한 곳에서 확인합니다.";
+            lblSubtitle.Text = "개인 지출을 기록하고 소비 흐름을 확인하는 가계부입니다.";
             // 
             // lblStatus
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblStatus.ForeColor = Color.FromArgb(100, 116, 139);
-            lblStatus.Location = new Point(62, 507);
+            lblStatus.Location = new Point(62, 506);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(212, 15);
-            lblStatus.TabIndex = 21;
-            lblStatus.Text = "DB 초기화 후 각 기능 화면으로 이동합니다.";
+            lblStatus.Size = new Size(241, 15);
+            lblStatus.TabIndex = 18;
+            lblStatus.Text = "expense.db 초기화 후 각 기능 화면으로 이동합니다.";
             // 
-            // buttonAddTask
+            // buttonAddExpense
             // 
-            buttonAddTask.BackColor = Color.White;
-            buttonAddTask.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
-            buttonAddTask.FlatAppearance.BorderSize = 2;
-            buttonAddTask.FlatStyle = FlatStyle.Flat;
-            buttonAddTask.Location = new Point(62, 150);
-            buttonAddTask.Name = "buttonAddTask";
-            buttonAddTask.Size = new Size(365, 82);
-            buttonAddTask.TabIndex = 3;
-            buttonAddTask.UseVisualStyleBackColor = false;
-            buttonAddTask.Click += buttonAddTask_Click;
+            buttonAddExpense.BackColor = Color.White;
+            buttonAddExpense.FlatAppearance.BorderColor = Color.FromArgb(37, 99, 235);
+            buttonAddExpense.FlatAppearance.BorderSize = 2;
+            buttonAddExpense.FlatStyle = FlatStyle.Flat;
+            buttonAddExpense.Location = new Point(62, 150);
+            buttonAddExpense.Name = "buttonAddExpense";
+            buttonAddExpense.Size = new Size(365, 82);
+            buttonAddExpense.TabIndex = 3;
+            buttonAddExpense.UseVisualStyleBackColor = false;
+            buttonAddExpense.Click += buttonAddExpense_Click;
             // 
-            // buttonTaskList
+            // buttonExpenseList
             // 
-            buttonTaskList.BackColor = Color.White;
-            buttonTaskList.FlatAppearance.BorderColor = Color.FromArgb(5, 150, 105);
-            buttonTaskList.FlatAppearance.BorderSize = 2;
-            buttonTaskList.FlatStyle = FlatStyle.Flat;
-            buttonTaskList.Location = new Point(459, 150);
-            buttonTaskList.Name = "buttonTaskList";
-            buttonTaskList.Size = new Size(365, 82);
-            buttonTaskList.TabIndex = 4;
-            buttonTaskList.UseVisualStyleBackColor = false;
-            buttonTaskList.Click += buttonTaskList_Click;
+            buttonExpenseList.BackColor = Color.White;
+            buttonExpenseList.FlatAppearance.BorderColor = Color.FromArgb(5, 150, 105);
+            buttonExpenseList.FlatAppearance.BorderSize = 2;
+            buttonExpenseList.FlatStyle = FlatStyle.Flat;
+            buttonExpenseList.Location = new Point(459, 150);
+            buttonExpenseList.Name = "buttonExpenseList";
+            buttonExpenseList.Size = new Size(365, 82);
+            buttonExpenseList.TabIndex = 4;
+            buttonExpenseList.UseVisualStyleBackColor = false;
+            buttonExpenseList.Click += buttonExpenseList_Click;
             // 
-            // buttonEditTask
+            // buttonManageExpense
             // 
-            buttonEditTask.BackColor = Color.White;
-            buttonEditTask.FlatAppearance.BorderColor = Color.FromArgb(234, 88, 12);
-            buttonEditTask.FlatAppearance.BorderSize = 2;
-            buttonEditTask.FlatStyle = FlatStyle.Flat;
-            buttonEditTask.Location = new Point(62, 257);
-            buttonEditTask.Name = "buttonEditTask";
-            buttonEditTask.Size = new Size(365, 82);
-            buttonEditTask.TabIndex = 5;
-            buttonEditTask.UseVisualStyleBackColor = false;
-            buttonEditTask.Click += buttonEditTask_Click;
-            // 
-            // buttonSearch
-            // 
-            buttonSearch.BackColor = Color.White;
-            buttonSearch.FlatAppearance.BorderColor = Color.FromArgb(124, 58, 237);
-            buttonSearch.FlatAppearance.BorderSize = 2;
-            buttonSearch.FlatStyle = FlatStyle.Flat;
-            buttonSearch.Location = new Point(459, 257);
-            buttonSearch.Name = "buttonSearch";
-            buttonSearch.Size = new Size(365, 82);
-            buttonSearch.TabIndex = 6;
-            buttonSearch.UseVisualStyleBackColor = false;
-            buttonSearch.Click += buttonSearch_Click;
+            buttonManageExpense.BackColor = Color.White;
+            buttonManageExpense.FlatAppearance.BorderColor = Color.FromArgb(234, 88, 12);
+            buttonManageExpense.FlatAppearance.BorderSize = 2;
+            buttonManageExpense.FlatStyle = FlatStyle.Flat;
+            buttonManageExpense.Location = new Point(62, 260);
+            buttonManageExpense.Name = "buttonManageExpense";
+            buttonManageExpense.Size = new Size(365, 82);
+            buttonManageExpense.TabIndex = 5;
+            buttonManageExpense.UseVisualStyleBackColor = false;
+            buttonManageExpense.Click += buttonManageExpense_Click;
             // 
             // buttonStats
             // 
             buttonStats.BackColor = Color.White;
-            buttonStats.FlatAppearance.BorderColor = Color.FromArgb(100, 116, 139);
+            buttonStats.FlatAppearance.BorderColor = Color.FromArgb(124, 58, 237);
             buttonStats.FlatAppearance.BorderSize = 2;
             buttonStats.FlatStyle = FlatStyle.Flat;
-            buttonStats.Location = new Point(62, 364);
+            buttonStats.Location = new Point(459, 260);
             buttonStats.Name = "buttonStats";
             buttonStats.Size = new Size(365, 82);
-            buttonStats.TabIndex = 7;
+            buttonStats.TabIndex = 6;
             buttonStats.UseVisualStyleBackColor = false;
             buttonStats.Click += buttonStats_Click;
             // 
@@ -169,116 +153,90 @@ namespace ScheduleProject
             buttonExit.FlatAppearance.BorderColor = Color.FromArgb(220, 38, 38);
             buttonExit.FlatAppearance.BorderSize = 2;
             buttonExit.FlatStyle = FlatStyle.Flat;
-            buttonExit.Location = new Point(459, 364);
+            buttonExit.Location = new Point(62, 370);
             buttonExit.Name = "buttonExit";
-            buttonExit.Size = new Size(365, 82);
-            buttonExit.TabIndex = 8;
+            buttonExit.Size = new Size(762, 82);
+            buttonExit.TabIndex = 7;
             buttonExit.UseVisualStyleBackColor = false;
             buttonExit.Click += buttonExit_Click;
             // 
-            // lblAddTaskTitle
+            // lblAddExpenseTitle
             // 
-            lblAddTaskTitle.AutoSize = true;
-            lblAddTaskTitle.BackColor = Color.White;
-            lblAddTaskTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lblAddTaskTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblAddTaskTitle.Location = new Point(86, 171);
-            lblAddTaskTitle.Name = "lblAddTaskTitle";
-            lblAddTaskTitle.Size = new Size(78, 21);
-            lblAddTaskTitle.TabIndex = 9;
-            lblAddTaskTitle.Text = "일정 등록";
-            lblAddTaskTitle.Click += buttonAddTask_Click;
+            lblAddExpenseTitle.AutoSize = true;
+            lblAddExpenseTitle.BackColor = Color.White;
+            lblAddExpenseTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblAddExpenseTitle.ForeColor = Color.FromArgb(30, 41, 59);
+            lblAddExpenseTitle.Location = new Point(86, 171);
+            lblAddExpenseTitle.Name = "lblAddExpenseTitle";
+            lblAddExpenseTitle.Size = new Size(78, 21);
+            lblAddExpenseTitle.TabIndex = 8;
+            lblAddExpenseTitle.Text = "지출 등록";
+            lblAddExpenseTitle.Click += buttonAddExpense_Click;
             // 
-            // lblAddTaskDesc
+            // lblAddExpenseDesc
             // 
-            lblAddTaskDesc.AutoSize = true;
-            lblAddTaskDesc.BackColor = Color.White;
-            lblAddTaskDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            lblAddTaskDesc.ForeColor = Color.FromArgb(100, 116, 139);
-            lblAddTaskDesc.Location = new Point(88, 200);
-            lblAddTaskDesc.Name = "lblAddTaskDesc";
-            lblAddTaskDesc.Size = new Size(139, 15);
-            lblAddTaskDesc.TabIndex = 10;
-            lblAddTaskDesc.Text = "새 일정과 마감일을 추가";
-            lblAddTaskDesc.Click += buttonAddTask_Click;
+            lblAddExpenseDesc.AutoSize = true;
+            lblAddExpenseDesc.BackColor = Color.White;
+            lblAddExpenseDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            lblAddExpenseDesc.ForeColor = Color.FromArgb(100, 116, 139);
+            lblAddExpenseDesc.Location = new Point(88, 200);
+            lblAddExpenseDesc.Name = "lblAddExpenseDesc";
+            lblAddExpenseDesc.Size = new Size(212, 15);
+            lblAddExpenseDesc.TabIndex = 9;
+            lblAddExpenseDesc.Text = "금액, 카테고리, 결제수단, 메모를 기록";
+            lblAddExpenseDesc.Click += buttonAddExpense_Click;
             // 
-            // lblTaskListTitle
+            // lblExpenseListTitle
             // 
-            lblTaskListTitle.AutoSize = true;
-            lblTaskListTitle.BackColor = Color.White;
-            lblTaskListTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lblTaskListTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblTaskListTitle.Location = new Point(483, 171);
-            lblTaskListTitle.Name = "lblTaskListTitle";
-            lblTaskListTitle.Size = new Size(78, 21);
-            lblTaskListTitle.TabIndex = 11;
-            lblTaskListTitle.Text = "일정 목록";
-            lblTaskListTitle.Click += buttonTaskList_Click;
+            lblExpenseListTitle.AutoSize = true;
+            lblExpenseListTitle.BackColor = Color.White;
+            lblExpenseListTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblExpenseListTitle.ForeColor = Color.FromArgb(30, 41, 59);
+            lblExpenseListTitle.Location = new Point(483, 171);
+            lblExpenseListTitle.Name = "lblExpenseListTitle";
+            lblExpenseListTitle.Size = new Size(117, 21);
+            lblExpenseListTitle.TabIndex = 10;
+            lblExpenseListTitle.Text = "지출 목록/검색";
+            lblExpenseListTitle.Click += buttonExpenseList_Click;
             // 
-            // lblTaskListDesc
+            // lblExpenseListDesc
             // 
-            lblTaskListDesc.AutoSize = true;
-            lblTaskListDesc.BackColor = Color.White;
-            lblTaskListDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            lblTaskListDesc.ForeColor = Color.FromArgb(100, 116, 139);
-            lblTaskListDesc.Location = new Point(485, 200);
-            lblTaskListDesc.Name = "lblTaskListDesc";
-            lblTaskListDesc.Size = new Size(151, 15);
-            lblTaskListDesc.TabIndex = 12;
-            lblTaskListDesc.Text = "전체 및 날짜별 일정 확인";
-            lblTaskListDesc.Click += buttonTaskList_Click;
+            lblExpenseListDesc.AutoSize = true;
+            lblExpenseListDesc.BackColor = Color.White;
+            lblExpenseListDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            lblExpenseListDesc.ForeColor = Color.FromArgb(100, 116, 139);
+            lblExpenseListDesc.Location = new Point(485, 200);
+            lblExpenseListDesc.Name = "lblExpenseListDesc";
+            lblExpenseListDesc.Size = new Size(234, 15);
+            lblExpenseListDesc.TabIndex = 11;
+            lblExpenseListDesc.Text = "날짜, 카테고리, 결제수단 기준으로 조회";
+            lblExpenseListDesc.Click += buttonExpenseList_Click;
             // 
-            // lblEditTaskTitle
+            // lblManageExpenseTitle
             // 
-            lblEditTaskTitle.AutoSize = true;
-            lblEditTaskTitle.BackColor = Color.White;
-            lblEditTaskTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lblEditTaskTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblEditTaskTitle.Location = new Point(86, 278);
-            lblEditTaskTitle.Name = "lblEditTaskTitle";
-            lblEditTaskTitle.Size = new Size(78, 21);
-            lblEditTaskTitle.TabIndex = 13;
-            lblEditTaskTitle.Text = "일정 관리";
-            lblEditTaskTitle.Click += buttonEditTask_Click;
+            lblManageExpenseTitle.AutoSize = true;
+            lblManageExpenseTitle.BackColor = Color.White;
+            lblManageExpenseTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblManageExpenseTitle.ForeColor = Color.FromArgb(30, 41, 59);
+            lblManageExpenseTitle.Location = new Point(86, 281);
+            lblManageExpenseTitle.Name = "lblManageExpenseTitle";
+            lblManageExpenseTitle.Size = new Size(78, 21);
+            lblManageExpenseTitle.TabIndex = 12;
+            lblManageExpenseTitle.Text = "지출 관리";
+            lblManageExpenseTitle.Click += buttonManageExpense_Click;
             // 
-            // lblEditTaskDesc
+            // lblManageExpenseDesc
             // 
-            lblEditTaskDesc.AutoSize = true;
-            lblEditTaskDesc.BackColor = Color.White;
-            lblEditTaskDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            lblEditTaskDesc.ForeColor = Color.FromArgb(100, 116, 139);
-            lblEditTaskDesc.Location = new Point(88, 307);
-            lblEditTaskDesc.Name = "lblEditTaskDesc";
-            lblEditTaskDesc.Size = new Size(126, 15);
-            lblEditTaskDesc.TabIndex = 14;
-            lblEditTaskDesc.Text = "수정, 삭제, 완료 처리";
-            lblEditTaskDesc.Click += buttonEditTask_Click;
-            // 
-            // lblSearchTitle
-            // 
-            lblSearchTitle.AutoSize = true;
-            lblSearchTitle.BackColor = Color.White;
-            lblSearchTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
-            lblSearchTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblSearchTitle.Location = new Point(483, 278);
-            lblSearchTitle.Name = "lblSearchTitle";
-            lblSearchTitle.Size = new Size(42, 21);
-            lblSearchTitle.TabIndex = 15;
-            lblSearchTitle.Text = "검색";
-            lblSearchTitle.Click += buttonSearch_Click;
-            // 
-            // lblSearchDesc
-            // 
-            lblSearchDesc.AutoSize = true;
-            lblSearchDesc.BackColor = Color.White;
-            lblSearchDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            lblSearchDesc.ForeColor = Color.FromArgb(100, 116, 139);
-            lblSearchDesc.Location = new Point(485, 307);
-            lblSearchDesc.Name = "lblSearchDesc";
-            lblSearchDesc.Size = new Size(143, 15);
-            lblSearchDesc.TabIndex = 16;
-            lblSearchDesc.Text = "제목과 내용 기준으로 검색";
-            lblSearchDesc.Click += buttonSearch_Click;
+            lblManageExpenseDesc.AutoSize = true;
+            lblManageExpenseDesc.BackColor = Color.White;
+            lblManageExpenseDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            lblManageExpenseDesc.ForeColor = Color.FromArgb(100, 116, 139);
+            lblManageExpenseDesc.Location = new Point(88, 310);
+            lblManageExpenseDesc.Name = "lblManageExpenseDesc";
+            lblManageExpenseDesc.Size = new Size(151, 15);
+            lblManageExpenseDesc.TabIndex = 13;
+            lblManageExpenseDesc.Text = "등록된 지출 수정 및 삭제";
+            lblManageExpenseDesc.Click += buttonManageExpense_Click;
             // 
             // lblStatsTitle
             // 
@@ -286,11 +244,11 @@ namespace ScheduleProject
             lblStatsTitle.BackColor = Color.White;
             lblStatsTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblStatsTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblStatsTitle.Location = new Point(86, 385);
+            lblStatsTitle.Location = new Point(483, 281);
             lblStatsTitle.Name = "lblStatsTitle";
-            lblStatsTitle.Size = new Size(42, 21);
-            lblStatsTitle.TabIndex = 17;
-            lblStatsTitle.Text = "통계";
+            lblStatsTitle.Size = new Size(78, 21);
+            lblStatsTitle.TabIndex = 14;
+            lblStatsTitle.Text = "지출 통계";
             lblStatsTitle.Click += buttonStats_Click;
             // 
             // lblStatsDesc
@@ -299,11 +257,11 @@ namespace ScheduleProject
             lblStatsDesc.BackColor = Color.White;
             lblStatsDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblStatsDesc.ForeColor = Color.FromArgb(100, 116, 139);
-            lblStatsDesc.Location = new Point(88, 414);
+            lblStatsDesc.Location = new Point(485, 310);
             lblStatsDesc.Name = "lblStatsDesc";
-            lblStatsDesc.Size = new Size(151, 15);
-            lblStatsDesc.TabIndex = 18;
-            lblStatsDesc.Text = "완료 현황과 카테고리 집계";
+            lblStatsDesc.Size = new Size(245, 15);
+            lblStatsDesc.TabIndex = 15;
+            lblStatsDesc.Text = "월별 합계와 카테고리별 소비 비율 확인";
             lblStatsDesc.Click += buttonStats_Click;
             // 
             // lblExitTitle
@@ -312,10 +270,10 @@ namespace ScheduleProject
             lblExitTitle.BackColor = Color.White;
             lblExitTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblExitTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblExitTitle.Location = new Point(483, 385);
+            lblExitTitle.Location = new Point(86, 391);
             lblExitTitle.Name = "lblExitTitle";
             lblExitTitle.Size = new Size(42, 21);
-            lblExitTitle.TabIndex = 19;
+            lblExitTitle.TabIndex = 16;
             lblExitTitle.Text = "종료";
             lblExitTitle.Click += buttonExit_Click;
             // 
@@ -325,10 +283,10 @@ namespace ScheduleProject
             lblExitDesc.BackColor = Color.White;
             lblExitDesc.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblExitDesc.ForeColor = Color.FromArgb(100, 116, 139);
-            lblExitDesc.Location = new Point(485, 414);
+            lblExitDesc.Location = new Point(88, 420);
             lblExitDesc.Name = "lblExitDesc";
             lblExitDesc.Size = new Size(83, 15);
-            lblExitDesc.TabIndex = 20;
+            lblExitDesc.TabIndex = 17;
             lblExitDesc.Text = "프로그램 닫기";
             lblExitDesc.Click += buttonExit_Click;
             // 
@@ -342,21 +300,18 @@ namespace ScheduleProject
             Controls.Add(lblExitTitle);
             Controls.Add(lblStatsDesc);
             Controls.Add(lblStatsTitle);
-            Controls.Add(lblSearchDesc);
-            Controls.Add(lblSearchTitle);
-            Controls.Add(lblEditTaskDesc);
-            Controls.Add(lblEditTaskTitle);
-            Controls.Add(lblTaskListDesc);
-            Controls.Add(lblTaskListTitle);
-            Controls.Add(lblAddTaskDesc);
-            Controls.Add(lblAddTaskTitle);
+            Controls.Add(lblManageExpenseDesc);
+            Controls.Add(lblManageExpenseTitle);
+            Controls.Add(lblExpenseListDesc);
+            Controls.Add(lblExpenseListTitle);
+            Controls.Add(lblAddExpenseDesc);
+            Controls.Add(lblAddExpenseTitle);
             Controls.Add(lblStatus);
             Controls.Add(buttonExit);
             Controls.Add(buttonStats);
-            Controls.Add(buttonSearch);
-            Controls.Add(buttonEditTask);
-            Controls.Add(buttonTaskList);
-            Controls.Add(buttonAddTask);
+            Controls.Add(buttonManageExpense);
+            Controls.Add(buttonExpenseList);
+            Controls.Add(buttonAddExpense);
             Controls.Add(lblToday);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
@@ -364,7 +319,7 @@ namespace ScheduleProject
             MaximizeBox = false;
             Name = "FormMain";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "개인 일정 및 과제 관리 프로그램";
+            Text = "MoneyNote - 개인 지출 관리";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -375,20 +330,17 @@ namespace ScheduleProject
         private Label lblToday;
         private Label lblSubtitle;
         private Label lblStatus;
-        private Button buttonAddTask;
-        private Button buttonTaskList;
-        private Button buttonEditTask;
-        private Button buttonSearch;
+        private Button buttonAddExpense;
+        private Button buttonExpenseList;
+        private Button buttonManageExpense;
         private Button buttonStats;
         private Button buttonExit;
-        private Label lblAddTaskTitle;
-        private Label lblAddTaskDesc;
-        private Label lblTaskListTitle;
-        private Label lblTaskListDesc;
-        private Label lblEditTaskTitle;
-        private Label lblEditTaskDesc;
-        private Label lblSearchTitle;
-        private Label lblSearchDesc;
+        private Label lblAddExpenseTitle;
+        private Label lblAddExpenseDesc;
+        private Label lblExpenseListTitle;
+        private Label lblExpenseListDesc;
+        private Label lblManageExpenseTitle;
+        private Label lblManageExpenseDesc;
         private Label lblStatsTitle;
         private Label lblStatsDesc;
         private Label lblExitTitle;
