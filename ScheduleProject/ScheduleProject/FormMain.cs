@@ -1,12 +1,82 @@
+using System.Drawing;
+
 namespace ScheduleProject
 {
     public partial class FormMain : Form
     {
+        private readonly Color menuNormalColor = Color.White;
+        private readonly Color menuHoverColor = Color.FromArgb(241, 245, 249);
+
         public FormMain()
         {
             InitializeComponent();
 
             lblToday.Text = "오늘 날짜: " + DateTime.Now.ToString("yyyy-MM-dd");
+            InitializeMenuHoverEffects();
+        }
+
+        private void InitializeMenuHoverEffects()
+        {
+            ConfigureMenuHover(buttonAddTask, lblAddTaskTitle, lblAddTaskDesc);
+            ConfigureMenuHover(buttonTaskList, lblTaskListTitle, lblTaskListDesc);
+            ConfigureMenuHover(buttonEditTask, lblEditTaskTitle, lblEditTaskDesc);
+            ConfigureMenuHover(buttonSearch, lblSearchTitle, lblSearchDesc);
+            ConfigureMenuHover(buttonStats, lblStatsTitle, lblStatsDesc);
+            ConfigureMenuHover(buttonExit, lblExitTitle, lblExitDesc);
+        }
+
+        private void ConfigureMenuHover(Button button, params Label[] labels)
+        {
+            Control[] controls = new Control[labels.Length + 1];
+            controls[0] = button;
+
+            for (int i = 0; i < labels.Length; i++)
+            {
+                controls[i + 1] = labels[i];
+                labels[i].Cursor = Cursors.Hand;
+            }
+
+            foreach (Control control in controls)
+            {
+                control.MouseEnter += (sender, e) => SetMenuHover(button, labels, true);
+                control.MouseLeave += (sender, e) =>
+                {
+                    BeginInvoke(() =>
+                    {
+                        if (!IsMouseOverAny(controls))
+                        {
+                            SetMenuHover(button, labels, false);
+                        }
+                    });
+                };
+            }
+        }
+
+        private void SetMenuHover(Button button, Label[] labels, bool isHover)
+        {
+            Color targetColor = isHover ? menuHoverColor : menuNormalColor;
+
+            button.BackColor = targetColor;
+            foreach (Label label in labels)
+            {
+                label.BackColor = targetColor;
+            }
+        }
+
+        private static bool IsMouseOverAny(Control[] controls)
+        {
+            Point mousePosition = Cursor.Position;
+
+            foreach (Control control in controls)
+            {
+                Rectangle bounds = new Rectangle(control.PointToScreen(Point.Empty), control.Size);
+                if (bounds.Contains(mousePosition))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void buttonAddTask_Click(object sender, EventArgs e)
