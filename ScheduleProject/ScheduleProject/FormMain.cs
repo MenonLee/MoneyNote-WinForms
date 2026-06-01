@@ -5,7 +5,8 @@ namespace ScheduleProject
     public partial class FormMain : Form
     {
         private readonly Color menuNormalColor = Color.White;
-        private readonly Color menuHoverColor = Color.FromArgb(241, 245, 249);
+        private readonly Color menuHoverColor = Color.FromArgb(226, 232, 240);
+        private readonly Color menuMouseDownColor = Color.FromArgb(203, 213, 225);
 
         public FormMain()
         {
@@ -27,6 +28,9 @@ namespace ScheduleProject
 
         private void ConfigureMenuHover(Button button, params Label[] labels)
         {
+            button.FlatAppearance.MouseOverBackColor = menuHoverColor;
+            button.FlatAppearance.MouseDownBackColor = menuMouseDownColor;
+
             Control[] controls = new Control[labels.Length + 1];
             controls[0] = button;
 
