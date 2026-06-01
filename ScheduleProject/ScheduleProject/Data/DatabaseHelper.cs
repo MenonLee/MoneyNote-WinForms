@@ -8,11 +8,18 @@ namespace ScheduleProject.Data
 {
     public class DatabaseHelper
     {
-        private static string dbName = "schedule.db";
-        private static string connectionString = $"Data Source={dbName}";
+        private static readonly string dbFolder = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "ScheduleProject"
+        );
+
+        private static readonly string dbPath = Path.Combine(dbFolder, "schedule.db");
+        private static readonly string connectionString = $"Data Source={dbPath}";
 
         public static void InitializeDatabase()
         {
+            Directory.CreateDirectory(dbFolder);
+
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
@@ -52,7 +59,8 @@ namespace ScheduleProject.Data
                     command.Parameters.AddWithValue("@Category", task.Category ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Priority", task.Priority ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@IsCompleted", task.IsCompleted ? 1 : 0);
-                    command.Parameters.AddWithValue("@CreatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    var createdAt = task.CreatedAt == default ? DateTime.Now : task.CreatedAt;
+                    command.Parameters.AddWithValue("@CreatedAt", createdAt.ToString("yyyy-MM-dd HH:mm:ss"));
                     
                     command.ExecuteNonQuery();
                 }
