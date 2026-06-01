@@ -57,11 +57,11 @@ namespace ScheduleProject
             lblToday.BorderStyle = BorderStyle.FixedSingle;
             lblToday.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblToday.ForeColor = Color.FromArgb(51, 65, 85);
-            lblToday.Location = new Point(648, 54);
+            lblToday.Location = new Point(594, 54);
             lblToday.Name = "lblToday";
-            lblToday.Size = new Size(176, 34);
+            lblToday.Size = new Size(230, 34);
             lblToday.TabIndex = 2;
-            lblToday.Text = "오늘 날짜: ";
+            lblToday.Text = "오늘 날짜: 0000-00-00";
             lblToday.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSubtitle
