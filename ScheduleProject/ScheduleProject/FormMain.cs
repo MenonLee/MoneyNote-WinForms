@@ -42,28 +42,28 @@ namespace ScheduleProject
 
             foreach (Control control in controls)
             {
-                control.MouseEnter += (sender, e) => SetMenuHover(button, labels, true);
+                control.MouseEnter += (sender, e) => SetMenuColor(button, labels, menuHoverColor);
+                control.MouseDown += (sender, e) => SetMenuColor(button, labels, menuMouseDownColor);
+                control.MouseUp += (sender, e) => SetMenuColor(button, labels, menuHoverColor);
                 control.MouseLeave += (sender, e) =>
                 {
                     BeginInvoke(() =>
                     {
                         if (!IsMouseOverAny(controls))
                         {
-                            SetMenuHover(button, labels, false);
+                            SetMenuColor(button, labels, menuNormalColor);
                         }
                     });
                 };
             }
         }
 
-        private void SetMenuHover(Button button, Label[] labels, bool isHover)
+        private static void SetMenuColor(Button button, Label[] labels, Color color)
         {
-            Color targetColor = isHover ? menuHoverColor : menuNormalColor;
-
-            button.BackColor = targetColor;
+            button.BackColor = color;
             foreach (Label label in labels)
             {
-                label.BackColor = targetColor;
+                label.BackColor = color;
             }
         }
 
