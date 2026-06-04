@@ -34,8 +34,8 @@ namespace ScheduleProject
 
             DatabaseHelper.AddExpense(expense);
             MessageBox.Show("지출 내역이 저장되었습니다.", "저장 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            ClearInput();
-            textTitle.Focus();
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private bool ValidateInput(out int amount)
