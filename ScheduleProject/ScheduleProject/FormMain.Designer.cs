@@ -699,25 +699,25 @@ namespace ScheduleProject
             // 
             // lblMonthlyExpenseValue
             // 
-            lblMonthlyExpenseValue.AutoSize = true;
             lblMonthlyExpenseValue.Font = new Font("맑은 고딕", 15F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblMonthlyExpenseValue.ForeColor = Color.FromArgb(15, 23, 42);
-            lblMonthlyExpenseValue.Location = new Point(16, 46);
+            lblMonthlyExpenseValue.Location = new Point(0, 44);
             lblMonthlyExpenseValue.Name = "lblMonthlyExpenseValue";
-            lblMonthlyExpenseValue.Size = new Size(103, 28);
+            lblMonthlyExpenseValue.Size = new Size(137, 34);
             lblMonthlyExpenseValue.TabIndex = 1;
             lblMonthlyExpenseValue.Text = "184,500원";
+            lblMonthlyExpenseValue.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblMonthlyExpenseCaption
             // 
-            lblMonthlyExpenseCaption.AutoSize = true;
             lblMonthlyExpenseCaption.Font = new Font("맑은 고딕", 8.5F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblMonthlyExpenseCaption.ForeColor = Color.FromArgb(71, 85, 105);
-            lblMonthlyExpenseCaption.Location = new Point(16, 16);
+            lblMonthlyExpenseCaption.Location = new Point(0, 15);
             lblMonthlyExpenseCaption.Name = "lblMonthlyExpenseCaption";
-            lblMonthlyExpenseCaption.Size = new Size(83, 15);
+            lblMonthlyExpenseCaption.Size = new Size(137, 18);
             lblMonthlyExpenseCaption.TabIndex = 0;
             lblMonthlyExpenseCaption.Text = "이번 달 지출";
+            lblMonthlyExpenseCaption.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblDashboardSubtitle
             // 
