@@ -384,11 +384,12 @@ namespace ScheduleProject
             // 
             lblAiCommentText.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblAiCommentText.ForeColor = Color.FromArgb(71, 85, 105);
-            lblAiCommentText.Location = new Point(31, 417);
+            lblAiCommentText.Location = new Point(31, 414);
             lblAiCommentText.Name = "lblAiCommentText";
-            lblAiCommentText.Size = new Size(617, 31);
+            lblAiCommentText.Size = new Size(617, 22);
             lblAiCommentText.TabIndex = 9;
-            lblAiCommentText.Text = "이번 달은 식비 비중이 가장 높습니다. 예산 기능 연결 후 실제 소비 흐름을 분석합니다.";
+            lblAiCommentText.Text = "식비 비중이 높습니다. 예산 연결 후 실제 소비 흐름을 분석합니다.";
+            lblAiCommentText.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblAiCommentTitle
             // 
