@@ -93,7 +93,10 @@ namespace ScheduleProject
         private void buttonAddTask_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("지출 등록 화면 연결 예정");
+            using (var form = new FormAddExpense())
+            {
+                form.ShowDialog(this);
+            }
         }
 
         private void buttonTaskList_Click(object sender, EventArgs e)
