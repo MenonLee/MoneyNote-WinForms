@@ -384,7 +384,7 @@ namespace ScheduleProject
             // 
             lblAiCommentText.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblAiCommentText.ForeColor = Color.FromArgb(71, 85, 105);
-            lblAiCommentText.Location = new Point(31, 414);
+            lblAiCommentText.Location = new Point(31, 428);
             lblAiCommentText.Name = "lblAiCommentText";
             lblAiCommentText.Size = new Size(617, 22);
             lblAiCommentText.TabIndex = 9;
@@ -396,7 +396,7 @@ namespace ScheduleProject
             lblAiCommentTitle.AutoSize = true;
             lblAiCommentTitle.Font = new Font("맑은 고딕", 11F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblAiCommentTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblAiCommentTitle.Location = new Point(29, 387);
+            lblAiCommentTitle.Location = new Point(29, 402);
             lblAiCommentTitle.Name = "lblAiCommentTitle";
             lblAiCommentTitle.Size = new Size(117, 20);
             lblAiCommentTitle.TabIndex = 8;
