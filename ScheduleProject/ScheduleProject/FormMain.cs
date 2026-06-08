@@ -93,31 +93,31 @@ namespace ScheduleProject
         private void buttonAddTask_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("일정 등록 화면 연결 예정");
+            MessageBox.Show("지출 등록 화면 연결 예정");
         }
 
         private void buttonTaskList_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("일정 목록 화면 연결 예정");
+            MessageBox.Show("지출 내역/검색 화면 연결 예정");
         }
 
         private void buttonEditTask_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("일정 관리 화면 연결 예정");
+            MessageBox.Show("예산 관리 화면 연결 예정");
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("검색 화면 연결 예정");
+            MessageBox.Show("고정지출 관리 화면 연결 예정");
         }
 
         private void buttonStats_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("통계 화면 연결 예정");
+            MessageBox.Show("소비 분석 화면 연결 예정");
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
