@@ -31,7 +31,6 @@ namespace ScheduleProject
             lblTitle = new Label();
             lblToday = new Label();
             lblSubtitle = new Label();
-            lblStatus = new Label();
             buttonAddTask = new Button();
             buttonTaskList = new Button();
             buttonEditTask = new Button();
@@ -127,17 +126,6 @@ namespace ScheduleProject
             lblSubtitle.Size = new Size(380, 19);
             lblSubtitle.TabIndex = 1;
             lblSubtitle.Text = "지출을 기록하고 예산, 고정지출, 소비 흐름을 한눈에 확인합니다.";
-            // 
-            // lblStatus
-            // 
-            lblStatus.AutoSize = true;
-            lblStatus.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            lblStatus.ForeColor = Color.FromArgb(100, 116, 139);
-            lblStatus.Location = new Point(48, 611);
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(331, 15);
-            lblStatus.TabIndex = 21;
-            lblStatus.Text = "대시보드 값은 DB 메서드 연결 전까지 예시 데이터로 표시됩니다.";
             // 
             // buttonAddTask
             // 
@@ -387,16 +375,16 @@ namespace ScheduleProject
             panelDashboard.Controls.Add(panelMonthlyExpense);
             panelDashboard.Controls.Add(lblDashboardSubtitle);
             panelDashboard.Controls.Add(lblDashboardTitle);
-            panelDashboard.Location = new Point(448, 112);
+            panelDashboard.Location = new Point(448, 138);
             panelDashboard.Name = "panelDashboard";
-            panelDashboard.Size = new Size(688, 514);
+            panelDashboard.Size = new Size(688, 460);
             panelDashboard.TabIndex = 22;
             // 
             // lblAiCommentText
             // 
             lblAiCommentText.Font = new Font("맑은 고딕", 9F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblAiCommentText.ForeColor = Color.FromArgb(71, 85, 105);
-            lblAiCommentText.Location = new Point(31, 462);
+            lblAiCommentText.Location = new Point(31, 417);
             lblAiCommentText.Name = "lblAiCommentText";
             lblAiCommentText.Size = new Size(617, 31);
             lblAiCommentText.TabIndex = 9;
@@ -407,7 +395,7 @@ namespace ScheduleProject
             lblAiCommentTitle.AutoSize = true;
             lblAiCommentTitle.Font = new Font("맑은 고딕", 11F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblAiCommentTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblAiCommentTitle.Location = new Point(29, 432);
+            lblAiCommentTitle.Location = new Point(29, 387);
             lblAiCommentTitle.Name = "lblAiCommentTitle";
             lblAiCommentTitle.Size = new Size(117, 20);
             lblAiCommentTitle.TabIndex = 8;
@@ -423,7 +411,7 @@ namespace ScheduleProject
             panelRecentExpenses.Controls.Add(lblRecentExpense2);
             panelRecentExpenses.Controls.Add(lblRecentExpense1);
             panelRecentExpenses.Controls.Add(lblRecentTitle);
-            panelRecentExpenses.Location = new Point(29, 241);
+            panelRecentExpenses.Location = new Point(29, 220);
             panelRecentExpenses.Name = "panelRecentExpenses";
             panelRecentExpenses.Size = new Size(306, 170);
             panelRecentExpenses.TabIndex = 6;
@@ -507,7 +495,7 @@ namespace ScheduleProject
             panelChartPreview.Controls.Add(barLife);
             panelChartPreview.Controls.Add(barFood);
             panelChartPreview.Controls.Add(lblChartTitle);
-            panelChartPreview.Location = new Point(356, 241);
+            panelChartPreview.Location = new Point(356, 220);
             panelChartPreview.Name = "panelChartPreview";
             panelChartPreview.Size = new Size(292, 170);
             panelChartPreview.TabIndex = 7;
@@ -758,7 +746,7 @@ namespace ScheduleProject
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(248, 250, 252);
-            ClientSize = new Size(1184, 661);
+            ClientSize = new Size(1184, 631);
             Controls.Add(panelDashboard);
             Controls.Add(lblExitDesc);
             Controls.Add(lblExitTitle);
@@ -772,7 +760,6 @@ namespace ScheduleProject
             Controls.Add(lblTaskListTitle);
             Controls.Add(lblAddTaskDesc);
             Controls.Add(lblAddTaskTitle);
-            Controls.Add(lblStatus);
             Controls.Add(buttonExit);
             Controls.Add(buttonStats);
             Controls.Add(buttonSearch);
@@ -810,7 +797,6 @@ namespace ScheduleProject
         private Label lblTitle;
         private Label lblToday;
         private Label lblSubtitle;
-        private Label lblStatus;
         private Button buttonAddTask;
         private Button buttonTaskList;
         private Button buttonEditTask;
