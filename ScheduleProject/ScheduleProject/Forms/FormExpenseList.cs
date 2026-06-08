@@ -150,6 +150,7 @@ namespace ScheduleProject.Forms
             dgvExpenses.AllowUserToAddRows = false;
             dgvExpenses.AllowUserToDeleteRows = false;
             dgvExpenses.AllowUserToResizeRows = false;
+            dgvExpenses.AutoGenerateColumns = false;
             dgvExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvExpenses.ColumnHeadersHeight = 34;
             dgvExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -166,6 +167,15 @@ namespace ScheduleProject.Forms
             dgvExpenses.ColumnHeadersDefaultCellStyle.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
             dgvExpenses.DefaultCellStyle.SelectionBackColor = Color.FromArgb(219, 234, 254);
             dgvExpenses.DefaultCellStyle.SelectionForeColor = textColor;
+
+            AddGridColumn(nameof(ExpenseListRow.Id), "번호", 55);
+            AddGridColumn(nameof(ExpenseListRow.Date), "날짜", 95);
+            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 160);
+            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 100, DataGridViewContentAlignment.MiddleRight, "N0");
+            AddGridColumn(nameof(ExpenseListRow.Category), "카테고리", 95);
+            AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 95);
+            AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 60);
+            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 230);
         }
 
         private void WireEvents()
@@ -322,55 +332,48 @@ namespace ScheduleProject.Forms
             dgvExpenses.DataSource = null;
             dgvExpenses.DataSource = currentExpenses
                 .Select(expense => new
+                ExpenseListRow
                 {
-                    expense.Id,
+                    Id = expense.Id,
                     Date = expense.ExpenseDate.ToString("yyyy-MM-dd"),
-                    expense.Title,
+                    Title = expense.Title,
                     Amount = expense.Amount,
-                    expense.Category,
-                    expense.PaymentMethod,
+                    Category = expense.Category,
+                    PaymentMethod = expense.PaymentMethod,
                     Fixed = expense.IsFixed ? "예" : "아니오",
-                    expense.Memo
+                    Memo = expense.Memo
                 })
                 .ToList();
-
-            ConfigureGridColumns();
 
             lblCount.Text = $"조회 건수: {currentExpenses.Count:N0}건";
             lblTotalAmount.Text = $"합계: {currentExpenses.Sum(expense => expense.Amount):N0}원";
             lblFilterStatus.Text = status;
         }
 
-        private void ConfigureGridColumns()
+        private void AddGridColumn(
+            string propertyName,
+            string headerText,
+            float fillWeight,
+            DataGridViewContentAlignment alignment = DataGridViewContentAlignment.MiddleLeft,
+            string? format = null)
         {
-            if (dgvExpenses.Columns.Count == 0)
+            var column = new DataGridViewTextBoxColumn
             {
-                return;
+                Name = propertyName,
+                DataPropertyName = propertyName,
+                HeaderText = headerText,
+                FillWeight = fillWeight,
+                SortMode = DataGridViewColumnSortMode.Automatic
+            };
+
+            column.DefaultCellStyle.Alignment = alignment;
+
+            if (!string.IsNullOrWhiteSpace(format))
+            {
+                column.DefaultCellStyle.Format = format;
             }
 
-            SetHeader("Id", "번호", 60);
-            SetHeader("Date", "날짜", 110);
-            SetHeader("Title", "지출명", 180);
-            SetHeader("Amount", "금액", 110);
-            SetHeader("Category", "카테고리", 110);
-            SetHeader("PaymentMethod", "결제수단", 110);
-            SetHeader("Fixed", "고정", 70);
-            SetHeader("Memo", "메모", 260);
-
-            if (dgvExpenses.Columns["Amount"] is DataGridViewColumn amountColumn)
-            {
-                amountColumn.DefaultCellStyle.Format = "N0";
-                amountColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            }
-        }
-
-        private void SetHeader(string columnName, string headerText, int width)
-        {
-            if (dgvExpenses.Columns[columnName] is DataGridViewColumn column)
-            {
-                column.HeaderText = headerText;
-                column.Width = width;
-            }
+            dgvExpenses.Columns.Add(column);
         }
 
         private string BuildFilterStatus(string keyword)
@@ -455,6 +458,18 @@ namespace ScheduleProject.Forms
         private void ShowError(Exception ex)
         {
             MessageBox.Show(ex.Message, "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private sealed class ExpenseListRow
+        {
+            public int Id { get; set; }
+            public string Date { get; set; } = "";
+            public string Title { get; set; } = "";
+            public int Amount { get; set; }
+            public string Category { get; set; } = "";
+            public string PaymentMethod { get; set; } = "";
+            public string Fixed { get; set; } = "";
+            public string Memo { get; set; } = "";
         }
     }
 }
