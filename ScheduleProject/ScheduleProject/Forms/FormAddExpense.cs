@@ -85,5 +85,10 @@ namespace ScheduleProject
         {
 
         }
+
+        private void textTitle_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

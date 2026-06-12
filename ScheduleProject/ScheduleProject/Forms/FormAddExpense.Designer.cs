@@ -42,10 +42,9 @@ namespace ScheduleProject
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("맑은 고딕", 24F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblTitle.ForeColor = Color.FromArgb(17, 24, 39);
-            lblTitle.Location = new Point(37, 26);
-            lblTitle.Margin = new Padding(2, 0, 2, 0);
+            lblTitle.Location = new Point(53, 43);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(159, 45);
+            lblTitle.Size = new Size(237, 65);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "지출 등록";
             // 
@@ -54,10 +53,9 @@ namespace ScheduleProject
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             lblSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
-            lblSubtitle.Location = new Point(40, 66);
-            lblSubtitle.Margin = new Padding(2, 0, 2, 0);
+            lblSubtitle.Location = new Point(57, 110);
             lblSubtitle.Name = "lblSubtitle";
-            lblSubtitle.Size = new Size(308, 19);
+            lblSubtitle.Size = new Size(438, 28);
             lblSubtitle.TabIndex = 1;
             lblSubtitle.Text = "오늘 사용한 금액과 결제 정보를 입력해 주세요.";
             // 
@@ -78,10 +76,9 @@ namespace ScheduleProject
             panelInput.Controls.Add(lblAmount);
             panelInput.Controls.Add(textTitle);
             panelInput.Controls.Add(lblExpenseTitle);
-            panelInput.Location = new Point(40, 100);
-            panelInput.Margin = new Padding(2, 2, 2, 2);
+            panelInput.Location = new Point(57, 167);
             panelInput.Name = "panelInput";
-            panelInput.Size = new Size(545, 270);
+            panelInput.Size = new Size(778, 449);
             panelInput.TabIndex = 2;
             // 
             // checkIsFixed
@@ -89,10 +86,9 @@ namespace ScheduleProject
             checkIsFixed.AutoSize = true;
             checkIsFixed.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             checkIsFixed.ForeColor = Color.FromArgb(51, 65, 85);
-            checkIsFixed.Location = new Point(28, 233);
-            checkIsFixed.Margin = new Padding(2, 2, 2, 2);
+            checkIsFixed.Location = new Point(40, 388);
             checkIsFixed.Name = "checkIsFixed";
-            checkIsFixed.Size = new Size(183, 23);
+            checkIsFixed.Size = new Size(259, 32);
             checkIsFixed.TabIndex = 12;
             checkIsFixed.Text = "매달 반복되는 고정 지출";
             checkIsFixed.UseVisualStyleBackColor = true;
@@ -101,11 +97,10 @@ namespace ScheduleProject
             // 
             textMemo.BorderStyle = BorderStyle.FixedSingle;
             textMemo.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            textMemo.Location = new Point(28, 175);
-            textMemo.Margin = new Padding(2, 2, 2, 2);
+            textMemo.Location = new Point(40, 292);
             textMemo.Multiline = true;
             textMemo.Name = "textMemo";
-            textMemo.Size = new Size(487, 47);
+            textMemo.Size = new Size(695, 77);
             textMemo.TabIndex = 11;
             // 
             // lblMemo
@@ -113,10 +108,9 @@ namespace ScheduleProject
             lblMemo.AutoSize = true;
             lblMemo.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblMemo.ForeColor = Color.FromArgb(30, 41, 59);
-            lblMemo.Location = new Point(28, 155);
-            lblMemo.Margin = new Padding(2, 0, 2, 0);
+            lblMemo.Location = new Point(40, 258);
             lblMemo.Name = "lblMemo";
-            lblMemo.Size = new Size(37, 19);
+            lblMemo.Size = new Size(52, 28);
             lblMemo.TabIndex = 10;
             lblMemo.Text = "메모";
             // 
@@ -124,10 +118,9 @@ namespace ScheduleProject
             // 
             dateExpense.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             dateExpense.Format = DateTimePickerFormat.Short;
-            dateExpense.Location = new Point(300, 119);
-            dateExpense.Margin = new Padding(2, 2, 2, 2);
+            dateExpense.Location = new Point(429, 198);
             dateExpense.Name = "dateExpense";
-            dateExpense.Size = new Size(216, 25);
+            dateExpense.Size = new Size(307, 34);
             dateExpense.TabIndex = 9;
             // 
             // lblExpenseDate
@@ -135,10 +128,9 @@ namespace ScheduleProject
             lblExpenseDate.AutoSize = true;
             lblExpenseDate.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblExpenseDate.ForeColor = Color.FromArgb(30, 41, 59);
-            lblExpenseDate.Location = new Point(300, 100);
-            lblExpenseDate.Margin = new Padding(2, 0, 2, 0);
+            lblExpenseDate.Location = new Point(429, 167);
             lblExpenseDate.Name = "lblExpenseDate";
-            lblExpenseDate.Size = new Size(70, 19);
+            lblExpenseDate.Size = new Size(99, 28);
             lblExpenseDate.TabIndex = 8;
             lblExpenseDate.Text = "지출 날짜";
             // 
@@ -148,10 +140,9 @@ namespace ScheduleProject
             comboPaymentMethod.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             comboPaymentMethod.FormattingEnabled = true;
             comboPaymentMethod.Items.AddRange(new object[] { "카드", "현금", "계좌이체", "간편결제", "기타" });
-            comboPaymentMethod.Location = new Point(28, 119);
-            comboPaymentMethod.Margin = new Padding(2, 2, 2, 2);
+            comboPaymentMethod.Location = new Point(40, 198);
             comboPaymentMethod.Name = "comboPaymentMethod";
-            comboPaymentMethod.Size = new Size(216, 25);
+            comboPaymentMethod.Size = new Size(307, 36);
             comboPaymentMethod.TabIndex = 7;
             // 
             // lblPaymentMethod
@@ -159,10 +150,9 @@ namespace ScheduleProject
             lblPaymentMethod.AutoSize = true;
             lblPaymentMethod.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblPaymentMethod.ForeColor = Color.FromArgb(30, 41, 59);
-            lblPaymentMethod.Location = new Point(28, 100);
-            lblPaymentMethod.Margin = new Padding(2, 0, 2, 0);
+            lblPaymentMethod.Location = new Point(40, 167);
             lblPaymentMethod.Name = "lblPaymentMethod";
-            lblPaymentMethod.Size = new Size(70, 19);
+            lblPaymentMethod.Size = new Size(99, 28);
             lblPaymentMethod.TabIndex = 6;
             lblPaymentMethod.Text = "결제 수단";
             // 
@@ -172,10 +162,9 @@ namespace ScheduleProject
             comboCategory.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
             comboCategory.FormattingEnabled = true;
             comboCategory.Items.AddRange(new object[] { "식비", "교통", "쇼핑", "문화", "생활", "통신", "기타" });
-            comboCategory.Location = new Point(300, 65);
-            comboCategory.Margin = new Padding(2, 2, 2, 2);
+            comboCategory.Location = new Point(429, 108);
             comboCategory.Name = "comboCategory";
-            comboCategory.Size = new Size(216, 25);
+            comboCategory.Size = new Size(307, 36);
             comboCategory.TabIndex = 5;
             comboCategory.SelectedIndexChanged += comboCategory_SelectedIndexChanged;
             // 
@@ -184,10 +173,9 @@ namespace ScheduleProject
             lblCategory.AutoSize = true;
             lblCategory.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblCategory.ForeColor = Color.FromArgb(30, 41, 59);
-            lblCategory.Location = new Point(300, 47);
-            lblCategory.Margin = new Padding(2, 0, 2, 0);
+            lblCategory.Location = new Point(429, 78);
             lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(65, 19);
+            lblCategory.Size = new Size(92, 28);
             lblCategory.TabIndex = 4;
             lblCategory.Text = "카테고리";
             lblCategory.Click += lblCategory_Click;
@@ -196,11 +184,10 @@ namespace ScheduleProject
             // 
             textAmount.BorderStyle = BorderStyle.FixedSingle;
             textAmount.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            textAmount.Location = new Point(28, 65);
-            textAmount.Margin = new Padding(2, 2, 2, 2);
+            textAmount.Location = new Point(40, 108);
             textAmount.Name = "textAmount";
             textAmount.PlaceholderText = "예: 8500";
-            textAmount.Size = new Size(215, 25);
+            textAmount.Size = new Size(306, 34);
             textAmount.TabIndex = 3;
             // 
             // lblAmount
@@ -208,10 +195,9 @@ namespace ScheduleProject
             lblAmount.AutoSize = true;
             lblAmount.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblAmount.ForeColor = Color.FromArgb(30, 41, 59);
-            lblAmount.Location = new Point(28, 47);
-            lblAmount.Margin = new Padding(2, 0, 2, 0);
+            lblAmount.Location = new Point(40, 78);
             lblAmount.Name = "lblAmount";
-            lblAmount.Size = new Size(37, 19);
+            lblAmount.Size = new Size(52, 28);
             lblAmount.TabIndex = 2;
             lblAmount.Text = "금액";
             // 
@@ -219,22 +205,21 @@ namespace ScheduleProject
             // 
             textTitle.BorderStyle = BorderStyle.FixedSingle;
             textTitle.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
-            textTitle.Location = new Point(120, 20);
-            textTitle.Margin = new Padding(2, 2, 2, 2);
+            textTitle.Location = new Point(171, 33);
             textTitle.Name = "textTitle";
             textTitle.PlaceholderText = "예: 점심, 커피, 버스";
-            textTitle.Size = new Size(396, 25);
+            textTitle.Size = new Size(565, 34);
             textTitle.TabIndex = 1;
+            textTitle.TextChanged += textTitle_TextChanged;
             // 
             // lblExpenseTitle
             // 
             lblExpenseTitle.AutoSize = true;
             lblExpenseTitle.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             lblExpenseTitle.ForeColor = Color.FromArgb(30, 41, 59);
-            lblExpenseTitle.Location = new Point(28, 22);
-            lblExpenseTitle.Margin = new Padding(2, 0, 2, 0);
+            lblExpenseTitle.Location = new Point(40, 37);
             lblExpenseTitle.Name = "lblExpenseTitle";
-            lblExpenseTitle.Size = new Size(51, 19);
+            lblExpenseTitle.Size = new Size(72, 28);
             lblExpenseTitle.TabIndex = 0;
             lblExpenseTitle.Text = "지출명";
             // 
@@ -245,10 +230,9 @@ namespace ScheduleProject
             buttonSave.FlatStyle = FlatStyle.Flat;
             buttonSave.Font = new Font("맑은 고딕", 11F, FontStyle.Bold, GraphicsUnit.Point, 129);
             buttonSave.ForeColor = Color.White;
-            buttonSave.Location = new Point(394, 389);
-            buttonSave.Margin = new Padding(2, 2, 2, 2);
+            buttonSave.Location = new Point(563, 648);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(114, 33);
+            buttonSave.Size = new Size(163, 55);
             buttonSave.TabIndex = 3;
             buttonSave.Text = "저장";
             buttonSave.UseVisualStyleBackColor = false;
@@ -262,10 +246,9 @@ namespace ScheduleProject
             buttonCancel.FlatStyle = FlatStyle.Flat;
             buttonCancel.Font = new Font("맑은 고딕", 11F, FontStyle.Bold, GraphicsUnit.Point, 129);
             buttonCancel.ForeColor = Color.FromArgb(51, 65, 85);
-            buttonCancel.Location = new Point(512, 389);
-            buttonCancel.Margin = new Padding(2, 2, 2, 2);
+            buttonCancel.Location = new Point(731, 648);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(73, 33);
+            buttonCancel.Size = new Size(104, 55);
             buttonCancel.TabIndex = 4;
             buttonCancel.Text = "닫기";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -273,17 +256,16 @@ namespace ScheduleProject
             // 
             // FormAddExpense
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(248, 250, 252);
-            ClientSize = new Size(625, 443);
+            ClientSize = new Size(893, 738);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
             Controls.Add(panelInput);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(2, 2, 2, 2);
             MaximizeBox = false;
             Name = "FormAddExpense";
             StartPosition = FormStartPosition.CenterParent;
