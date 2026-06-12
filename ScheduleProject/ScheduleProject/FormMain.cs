@@ -1,6 +1,7 @@
 using System.Drawing;
 using ScheduleProject.Data;
 using ScheduleProject.Models;
+using ScheduleProject.Services;
 
 namespace ScheduleProject
 {
@@ -8,6 +9,8 @@ namespace ScheduleProject
     {
         private readonly Color menuNormalColor = Color.White;
         private readonly Color menuHoverColor = Color.FromArgb(226, 232, 240);
+        private readonly GrokService grokService = new GrokService();
+        private bool isGeneratingAiComment;
 
         public FormMain()
         {
@@ -27,6 +30,7 @@ namespace ScheduleProject
             int monthlyBudget = DatabaseHelper.GetMonthlyBudget(year, month);
             int fixedExpense = DatabaseHelper.GetTotalFixedExpenseAmount();
             var categorySpending = DatabaseHelper.GetCategorySpending(year, month);
+            var categoryBudgets = DatabaseHelper.GetCategoryBudgets(year, month);
             var recentExpenses = DatabaseHelper.GetRecentExpenses(5);
 
             lblMonthlyExpenseValue.Text = FormatCurrency(monthlyExpense);
@@ -42,9 +46,63 @@ namespace ScheduleProject
             UpdateCategorySummary(categorySpending);
 
             string? aiComment = DatabaseHelper.GetLastAiAnalysis(year, month);
-            lblAiCommentText.Text = string.IsNullOrWhiteSpace(aiComment)
-                ? "AI 소비 분석 결과가 아직 없습니다."
-                : aiComment;
+            if (string.IsNullOrWhiteSpace(aiComment))
+            {
+                var summary = new MonthlySpendingSummary
+                {
+                    Year = year,
+                    Month = month,
+                    TotalExpenseAmount = monthlyExpense,
+                    MonthlyBudget = monthlyBudget,
+                    FixedExpenseAmount = fixedExpense,
+                    CategorySpending = categorySpending,
+                    CategoryBudgets = categoryBudgets,
+                    RecentExpenses = recentExpenses
+                };
+                GenerateAiCommentIfNeeded(summary);
+            }
+            else
+            {
+                lblAiCommentText.Text = aiComment;
+            }
+        }
+
+        private async void GenerateAiCommentIfNeeded(MonthlySpendingSummary summary)
+        {
+            if (isGeneratingAiComment)
+            {
+                return;
+            }
+
+            if (summary.TotalExpenseAmount <= 0 && summary.RecentExpenses.Count == 0)
+            {
+                lblAiCommentText.Text = "이번 달 지출 데이터가 쌓이면 AI 소비 코멘트를 생성합니다.";
+                return;
+            }
+
+            isGeneratingAiComment = true;
+            lblAiCommentText.Text = "AI 소비 코멘트 생성 중...";
+
+            try
+            {
+                string comment = await grokService.AnalyzeMonthlySpendingAsync(summary);
+                DatabaseHelper.AddAiAnalysisLog(new AiAnalysisLog
+                {
+                    Year = summary.Year,
+                    Month = summary.Month,
+                    Summary = comment,
+                    CreatedAt = DateTime.Now
+                });
+                lblAiCommentText.Text = comment;
+            }
+            catch (Exception ex)
+            {
+                lblAiCommentText.Text = $"AI 소비 코멘트를 생성하지 못했습니다. {ex.Message}";
+            }
+            finally
+            {
+                isGeneratingAiComment = false;
+            }
         }
 
         private void UpdateRecentExpenses(List<ExpenseItem> recentExpenses)
