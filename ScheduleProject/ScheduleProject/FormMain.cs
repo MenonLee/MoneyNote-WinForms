@@ -1,4 +1,6 @@
 using System.Drawing;
+using ScheduleProject.Data;
+using ScheduleProject.Models;
 
 namespace ScheduleProject
 {
@@ -13,6 +15,87 @@ namespace ScheduleProject
 
             lblToday.Text = "오늘 날짜: " + DateTime.Now.ToString("yyyy-MM-dd");
             InitializeMenuHoverEffects();
+            LoadDashboard();
+        }
+
+        private void LoadDashboard()
+        {
+            int year = DateTime.Today.Year;
+            int month = DateTime.Today.Month;
+
+            int monthlyExpense = DatabaseHelper.GetMonthlyExpenseAmount(year, month);
+            int monthlyBudget = DatabaseHelper.GetMonthlyBudget(year, month);
+            int fixedExpense = DatabaseHelper.GetTotalFixedExpenseAmount();
+            var categorySpending = DatabaseHelper.GetCategorySpending(year, month);
+            var recentExpenses = DatabaseHelper.GetRecentExpenses(5);
+
+            lblMonthlyExpenseValue.Text = FormatCurrency(monthlyExpense);
+            lblBudgetRateValue.Text = monthlyBudget > 0
+                ? $"{Math.Min(999, monthlyExpense * 100 / monthlyBudget)}%"
+                : "미설정";
+            lblFixedExpenseValue.Text = FormatCurrency(fixedExpense);
+            lblTopCategoryValue.Text = categorySpending.Count > 0
+                ? categorySpending.OrderByDescending(item => item.Value).First().Key
+                : "-";
+
+            UpdateRecentExpenses(recentExpenses);
+            UpdateCategorySummary(categorySpending);
+
+            string? aiComment = DatabaseHelper.GetLastAiAnalysis(year, month);
+            lblAiCommentText.Text = string.IsNullOrWhiteSpace(aiComment)
+                ? "AI 소비 분석 결과가 아직 없습니다."
+                : aiComment;
+        }
+
+        private void UpdateRecentExpenses(List<ExpenseItem> recentExpenses)
+        {
+            Label[] labels =
+            {
+                lblRecentExpense1,
+                lblRecentExpense2,
+                lblRecentExpense3,
+                lblRecentExpense4,
+                lblRecentExpense5
+            };
+
+            for (int i = 0; i < labels.Length; i++)
+            {
+                labels[i].Text = i < recentExpenses.Count
+                    ? $"{recentExpenses[i].Title} {FormatCurrency(recentExpenses[i].Amount)}"
+                    : "-";
+            }
+        }
+
+        private void UpdateCategorySummary(Dictionary<string, int> categorySpending)
+        {
+            Label[] labels = { lblChartFood, lblChartLife, lblChartTransport, lblChartEtc };
+            Panel[] bars = { barFood, barLife, barTransport, barEtc };
+            int total = categorySpending.Values.Sum();
+            const int maxBarWidth = 158;
+
+            var topCategories = categorySpending
+                .OrderByDescending(item => item.Value)
+                .Take(labels.Length)
+                .ToList();
+
+            for (int i = 0; i < labels.Length; i++)
+            {
+                if (i >= topCategories.Count || total <= 0)
+                {
+                    labels[i].Text = "- 0%";
+                    bars[i].Width = 0;
+                    continue;
+                }
+
+                int percent = (int)Math.Round(topCategories[i].Value * 100.0 / total);
+                labels[i].Text = $"{topCategories[i].Key} {percent}%";
+                bars[i].Width = Math.Max(4, maxBarWidth * percent / 100);
+            }
+        }
+
+        private static string FormatCurrency(int amount)
+        {
+            return amount.ToString("N0") + "원";
         }
 
         private void InitializeMenuHoverEffects()
@@ -95,7 +178,10 @@ namespace ScheduleProject
             ResetMenuColors();
             using (var form = new FormAddExpense())
             {
-                form.ShowDialog(this);
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    LoadDashboard();
+                }
             }
         }
 
@@ -124,6 +210,7 @@ namespace ScheduleProject
             {
                 form.ShowDialog(this);
             }
+            LoadDashboard();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
