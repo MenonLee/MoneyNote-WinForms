@@ -6,7 +6,7 @@ namespace ScheduleProject
 {
     public partial class FormAddExpense : Form
     {
-        private readonly GeminiService geminiService = new GeminiService();
+        private readonly GrokService grokService = new GrokService();
 
         public FormAddExpense()
         {
@@ -30,7 +30,7 @@ namespace ScheduleProject
 
             try
             {
-                NaturalExpenseResult result = await geminiService.ParseNaturalExpenseAsync(naturalText);
+                NaturalExpenseResult result = await grokService.ParseNaturalExpenseAsync(naturalText);
                 ApplyAiResult(result);
                 MessageBox.Show("AI 분석 결과를 입력칸에 채웠습니다. 저장 전에 내용을 확인해 주세요.", "AI 분석 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

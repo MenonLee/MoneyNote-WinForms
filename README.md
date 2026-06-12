@@ -6,7 +6,7 @@
 
 본 프로젝트는 C# Windows Forms와 SQLite를 사용하여 제작하며, GitHub 브랜치 기반 협업 방식으로 개발합니다.
 
-기본적인 지출 기록 기능에 더해 예산 관리, 고정지출 자동 관리, 차트 통계, CSV 백업, Gemini API 기반 AI 자연어 지출 등록 및 AI 소비 분석 기능을 추가하여 단순 가계부가 아니라 소비 습관을 분석해주는 프로그램으로 확장합니다.
+기본적인 지출 기록 기능에 더해 예산 관리, 고정지출 자동 관리, 차트 통계, CSV 백업, Grok API 기반 AI 자연어 지출 등록 및 AI 소비 분석 기능을 추가하여 단순 가계부가 아니라 소비 습관을 분석해주는 프로그램으로 확장합니다.
 
 ---
 
@@ -29,7 +29,7 @@
 | UI 프레임워크 | Windows Forms |
 | 데이터베이스 | SQLite |
 | DB 패키지 | Microsoft.Data.Sqlite |
-| AI API | Gemini API |
+| AI API | Grok API |
 | 협업 도구 | GitHub |
 | 개발 방식 | Feature Branch + Pull Request |
 
@@ -60,24 +60,24 @@
 | 차트 통계 | 카테고리별, 결제수단별 지출 비중을 차트로 표시 |
 | 월별 리포트 | 이번 달 지출과 지난달 지출을 비교 |
 | CSV 내보내기/가져오기 | 지출 데이터를 CSV 파일로 백업하거나 불러오기 |
-| AI 자연어 지출 등록 | 문장으로 입력한 지출 내용을 Gemini API로 분석하여 등록 폼 자동 입력 |
-| AI 소비 분석 코멘트 | Gemini API가 이번 달 소비 패턴과 절약 추천 문장 생성 |
+| AI 자연어 지출 등록 | 문장으로 입력한 지출 내용을 Grok API로 분석하여 등록 폼 자동 입력 |
+| AI 소비 분석 코멘트 | Grok API가 이번 달 소비 패턴과 절약 추천 문장 생성 |
 
 ---
 
-## Gemini API 활용
+## Grok API 활용
 
-AI 기능은 `GeminiService` 공통 클래스로 분리하여 사용합니다.
+AI 기능은 `GrokService` 공통 클래스로 분리하여 사용합니다.
 
 권장 위치:
 
 ```text
-ScheduleProject/ScheduleProject/Services/GeminiService.cs
+ScheduleProject/ScheduleProject/Services/GrokService.cs
 ```
 
 ### AI 자연어 지출 등록
 
-사용자가 문장으로 지출 내용을 입력하면 Gemini API가 제목, 금액, 카테고리, 결제수단, 날짜, 메모를 추출합니다.
+사용자가 문장으로 지출 내용을 입력하면 Grok API가 제목, 금액, 카테고리, 결제수단, 날짜, 메모를 추출합니다.
 
 입력 예시:
 
@@ -102,15 +102,15 @@ AI 분석 결과 예시:
 
 ```text
 1. 사용자가 자연어 문장을 입력한다.
-2. Gemini API에 문장을 전달한다.
-3. Gemini가 JSON 형태로 지출 정보를 반환한다.
+2. Grok API에 문장을 전달한다.
+3. Grok이 JSON 형태로 지출 정보를 반환한다.
 4. 반환된 값을 지출 등록 폼에 자동 입력한다.
 5. 사용자가 내용을 확인한 뒤 저장한다.
 ```
 
 ### AI 소비 분석 코멘트
 
-DB에 저장된 이번 달 지출 요약, 카테고리별 합계, 예산 정보를 Gemini API에 전달하여 소비 분석 문장을 생성합니다.
+DB에 저장된 이번 달 지출 요약, 카테고리별 합계, 예산 정보를 Grok API에 전달하여 소비 분석 문장을 생성합니다.
 
 출력 예시:
 
@@ -131,8 +131,9 @@ AnalyzeMonthlySpending(MonthlySpendingSummary summary)
 
 ```text
 - API 키를 코드에 직접 작성하지 않는다.
-- 환경 변수 또는 별도 설정 파일에서 API 키를 읽어온다.
-- Gemini 응답은 JSON 형태로 받아 파싱하기 쉽게 만든다.
+- `XAI_API_KEY` 환경 변수에서 API 키를 읽어온다.
+- 필요하면 `XAI_MODEL` 환경 변수로 Grok 모델명을 변경한다. 기본값은 `grok-4.3`이다.
+- Grok 응답은 JSON 형태로 받아 파싱하기 쉽게 만든다.
 - API 오류가 발생해도 프로그램이 종료되지 않도록 예외 처리를 한다.
 ```
 
@@ -291,7 +292,7 @@ public static void GenerateMonthlyFixedExpenses(int year, int month);
 ### Services
 
 ```text
-GeminiService
+GrokService
 - 자연어 지출 분석
 - 월별 소비 분석 코멘트 생성
 
@@ -310,9 +311,9 @@ CsvService
 |---|---|---|
 | 준서 | 메인 대시보드 + 예산 관리 | 메인 UI 개선, 월 지출 요약, 예산 설정, 남은 예산 표시 |
 | 정영 | DB + 고정지출 자동 생성 | DB 구조 확장, 공통 메서드, 고정지출 등록/자동 생성 |
-| 성인 | 지출 등록 + AI 자연어 등록 | 일반 지출 등록, Gemini 자연어 분석, 폼 자동 입력 |
+| 성인 | 지출 등록 + AI 자연어 등록 | 일반 지출 등록, Grok 자연어 분석, 폼 자동 입력 |
 | 범준 | 지출 목록 + 검색 + CSV | 지출 조회, 필터, 검색, CSV 내보내기/가져오기 |
-| 윤서 | 통계 차트 + AI 소비 분석 | 차트 통계, 월별 리포트, Gemini 소비 분석 코멘트 |
+| 윤서 | 통계 차트 + AI 소비 분석 | 차트 통계, 월별 리포트, Grok 소비 분석 코멘트 |
 
 ---
 
@@ -410,6 +411,7 @@ git push -u origin feature/ai-natural-expense
 - 예산 대비 지출 상태를 확인하여 과소비를 예방할 수 있습니다.
 - 고정지출을 자동으로 관리하여 반복 입력을 줄일 수 있습니다.
 - 카테고리별, 결제수단별 차트로 소비 패턴을 쉽게 파악할 수 있습니다.
-- Gemini API를 활용해 문장형 지출 입력과 AI 소비 분석을 제공할 수 있습니다.
+- Grok API를 활용해 문장형 지출 입력과 AI 소비 분석을 제공할 수 있습니다.
 - CSV 기능으로 지출 데이터를 백업하거나 엑셀에서 활용할 수 있습니다.
 - Windows Forms, SQLite, 외부 API 연동, GitHub 협업 방식을 함께 경험할 수 있습니다.
+
