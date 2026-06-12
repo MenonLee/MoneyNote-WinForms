@@ -386,7 +386,7 @@ namespace ScheduleProject
             lblAiCommentText.ForeColor = Color.FromArgb(71, 85, 105);
             lblAiCommentText.Location = new Point(31, 428);
             lblAiCommentText.Name = "lblAiCommentText";
-            lblAiCommentText.Size = new Size(617, 22);
+            lblAiCommentText.Size = new Size(617, 44);
             lblAiCommentText.TabIndex = 9;
             lblAiCommentText.Text = "식비 비중이 높습니다. 예산 연결 후 실제 소비 흐름을 분석합니다.";
             lblAiCommentText.TextAlign = ContentAlignment.MiddleLeft;
