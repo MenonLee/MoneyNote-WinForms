@@ -66,7 +66,7 @@ namespace ScheduleProject
             ClearForm();
         }
 
-        private void dgvExpenses_SelectionChanged(object sender, EventArgs e)
+        private void dgvExpenses_SelectionChanged(object? sender, EventArgs e)
         {
             if (dgvExpenses.SelectedRows.Count == 0) return;
 
