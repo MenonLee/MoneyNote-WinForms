@@ -131,8 +131,10 @@ AnalyzeMonthlySpending(MonthlySpendingSummary summary)
 
 ```text
 - API 키를 코드에 직접 작성하지 않는다.
-- `XAI_API_KEY` 환경 변수에서 API 키를 읽어온다.
-- 필요하면 `XAI_MODEL` 환경 변수로 Grok 모델명을 변경한다. 기본값은 `grok-4.3`이다.
+- `XAI_API_KEY` 또는 `GROQ_API_KEY` 환경 변수에서 API 키를 읽어온다.
+- `gsk_`로 시작하는 GroqCloud 키는 GroqCloud API로 자동 호출한다.
+- 필요하면 `XAI_MODEL` 또는 `GROQ_MODEL` 환경 변수로 모델명을 변경한다.
+- xAI Grok 기본 모델은 `grok-4.3`, GroqCloud 기본 모델은 `llama-3.3-70b-versatile`이다.
 - Grok 응답은 JSON 형태로 받아 파싱하기 쉽게 만든다.
 - API 오류가 발생해도 프로그램이 종료되지 않도록 예외 처리를 한다.
 ```

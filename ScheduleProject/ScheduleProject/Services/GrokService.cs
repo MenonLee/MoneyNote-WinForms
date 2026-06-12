@@ -28,6 +28,9 @@ namespace ScheduleProject.Services
 
     public class GrokService
     {
+        private const string XaiEndpoint = "https://api.x.ai/v1/chat/completions";
+        private const string GroqEndpoint = "https://api.groq.com/openai/v1/chat/completions";
+
         private static readonly HttpClient httpClient = new HttpClient();
         private static readonly JsonSerializerOptions jsonOptions = new JsonSerializerOptions
         {
@@ -36,13 +39,20 @@ namespace ScheduleProject.Services
 
         public async Task<NaturalExpenseResult> ParseNaturalExpenseAsync(string userText)
         {
-            string apiKey = Environment.GetEnvironmentVariable("XAI_API_KEY") ?? "";
+            string apiKey = Environment.GetEnvironmentVariable("XAI_API_KEY")
+                ?? Environment.GetEnvironmentVariable("GROQ_API_KEY")
+                ?? "";
             if (string.IsNullOrWhiteSpace(apiKey))
             {
-                throw new InvalidOperationException("XAI_API_KEY 환경 변수를 먼저 설정해 주세요.");
+                throw new InvalidOperationException("XAI_API_KEY 또는 GROQ_API_KEY 환경 변수를 먼저 설정해 주세요.");
             }
 
-            string model = Environment.GetEnvironmentVariable("XAI_MODEL") ?? "grok-4.3";
+            bool isGroqCloudKey = apiKey.StartsWith("gsk_", StringComparison.OrdinalIgnoreCase);
+            string model = Environment.GetEnvironmentVariable("XAI_MODEL")
+                ?? Environment.GetEnvironmentVariable("GROQ_MODEL")
+                ?? (isGroqCloudKey ? "llama-3.3-70b-versatile" : "grok-4.3");
+            string endpoint = isGroqCloudKey ? GroqEndpoint : XaiEndpoint;
+            string providerName = isGroqCloudKey ? "Groq" : "Grok";
             string today = DateTime.Today.ToString("yyyy-MM-dd");
 
             var requestBody = new
@@ -68,7 +78,7 @@ namespace ScheduleProject.Services
                 }
             };
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, "https://api.x.ai/v1/chat/completions")
+            using var request = new HttpRequestMessage(HttpMethod.Post, endpoint)
             {
                 Content = JsonContent.Create(requestBody)
             };
@@ -79,7 +89,7 @@ namespace ScheduleProject.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new InvalidOperationException($"Grok API 호출에 실패했습니다. ({(int)response.StatusCode})");
+                throw new InvalidOperationException($"{providerName} API 호출에 실패했습니다. ({(int)response.StatusCode})");
             }
 
             string contentText = ExtractMessageContent(responseText);
