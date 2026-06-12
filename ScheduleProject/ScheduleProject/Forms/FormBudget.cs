@@ -116,10 +116,53 @@ namespace ScheduleProject
                 return;
             }
 
+            if (!ValidateCategoryBudgetTotal(comboCategory.Text, amount))
+            {
+                return;
+            }
+
             SaveBudget(comboCategory.Text, amount);
             MessageBox.Show("카테고리 예산을 저장했습니다.", "저장 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
             textCategoryBudget.Clear();
             LoadBudgets();
+        }
+
+        private bool ValidateCategoryBudgetTotal(string category, int amount)
+        {
+            int year = dateBudgetMonth.Value.Year;
+            int month = dateBudgetMonth.Value.Month;
+            int monthlyBudget = DatabaseHelper.GetMonthlyBudget(year, month);
+
+            if (monthlyBudget <= 0)
+            {
+                MessageBox.Show(
+                    "월 전체 예산을 먼저 설정해 주세요.",
+                    "예산 확인",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                textMonthlyBudget.Focus();
+                return false;
+            }
+
+            var categoryBudgets = DatabaseHelper.GetCategoryBudgets(year, month);
+            int currentCategoryAmount = categoryBudgets.TryGetValue(category, out int existingAmount)
+                ? existingAmount
+                : 0;
+            int nextCategoryTotal = categoryBudgets.Values.Sum() - currentCategoryAmount + amount;
+
+            if (nextCategoryTotal > monthlyBudget)
+            {
+                MessageBox.Show(
+                    $"카테고리 예산 합계가 월 전체 예산을 넘을 수 없습니다.\n\n월 전체 예산: {FormatCurrency(monthlyBudget)}\n카테고리 예산 합계: {FormatCurrency(nextCategoryTotal)}",
+                    "예산 초과",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                textCategoryBudget.Focus();
+                textCategoryBudget.SelectAll();
+                return false;
+            }
+
+            return true;
         }
 
         private void SaveBudget(string category, int amount)
