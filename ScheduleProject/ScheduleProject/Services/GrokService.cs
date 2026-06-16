@@ -110,7 +110,8 @@ namespace ScheduleProject.Services
                     new { role = "system", content = systemPrompt },
                     new { role = "user", content = userContent }
                 },
-                ["temperature"] = 0.1
+                ["temperature"] = 0.1,
+                ["response_format"] = new { type = "json_object" }
             };
 
             using var request = new HttpRequestMessage(HttpMethod.Post, GroqEndpoint)
