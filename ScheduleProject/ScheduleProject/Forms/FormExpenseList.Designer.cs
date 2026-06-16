@@ -190,7 +190,7 @@ namespace ScheduleProject.Forms
             dgvExpenses.Name = "dgvExpenses";
             dgvExpenses.RowHeadersWidth = 51;
             dgvExpenses.RowTemplate.Height = 23;
-            dgvExpenses.Size = new Size(920, 330);
+            dgvExpenses.Size = new Size(920, 300);
             dgvExpenses.TabIndex = 15;
             dgvExpenses.CellContentClick += dgvExpenses_CellContentClick;
             // 

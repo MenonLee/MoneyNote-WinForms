@@ -78,7 +78,7 @@ namespace ScheduleProject.Forms
             dgvExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvExpenses.GridColor = Color.FromArgb(226, 232, 240);
             dgvExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dgvExpenses.RowHeadersVisible = false;
             dgvExpenses.AllowUserToAddRows = false;
             dgvExpenses.AllowUserToDeleteRows = false;
@@ -101,14 +101,13 @@ namespace ScheduleProject.Forms
             dgvExpenses.DefaultCellStyle.Padding = new Padding(4, 0, 0, 0);
 
             dgvExpenses.Columns.Clear();
-            AddGridColumn(nameof(ExpenseListRow.Id), "번호", 55);
-            AddGridColumn(nameof(ExpenseListRow.Date), "날짜", 95);
-            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 160);
-            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 100, DataGridViewContentAlignment.MiddleRight, "N0");
+            AddGridColumn(nameof(ExpenseListRow.Date), "날짜", 100);
+            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 190);
+            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 105, DataGridViewContentAlignment.MiddleRight, "N0");
             AddGridColumn(nameof(ExpenseListRow.Category), "카테고리", 95);
-            AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 95);
-            AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 60);
-            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 230);
+            AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 105);
+            AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 65, DataGridViewContentAlignment.MiddleCenter);
+            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 235);
         }
 
         private void WireEvents()
@@ -255,7 +254,6 @@ namespace ScheduleProject.Forms
             dgvExpenses.DataSource = currentExpenses
                 .Select(expense => new ExpenseListRow
                 {
-                    Id = expense.Id,
                     Date = expense.ExpenseDate.ToString("yyyy-MM-dd"),
                     Title = expense.Title,
                     Amount = expense.Amount,
@@ -270,7 +268,7 @@ namespace ScheduleProject.Forms
         private void AddGridColumn(
             string propertyName,
             string headerText,
-            float fillWeight,
+            int width,
             DataGridViewContentAlignment alignment = DataGridViewContentAlignment.MiddleLeft,
             string? format = null)
         {
@@ -279,7 +277,7 @@ namespace ScheduleProject.Forms
                 Name = propertyName,
                 DataPropertyName = propertyName,
                 HeaderText = headerText,
-                FillWeight = fillWeight,
+                Width = width,
                 SortMode = DataGridViewColumnSortMode.Automatic
             };
 
@@ -357,7 +355,6 @@ namespace ScheduleProject.Forms
 
         private sealed class ExpenseListRow
         {
-            public int Id { get; set; }
             public string Date { get; set; } = "";
             public string Title { get; set; } = "";
             public int Amount { get; set; }
