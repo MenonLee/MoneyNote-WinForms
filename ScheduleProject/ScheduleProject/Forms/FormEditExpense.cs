@@ -27,7 +27,7 @@ namespace ScheduleProject.Forms
         {
             Text = "MoneyNote - 지출 수정";
             BackColor = Color.FromArgb(248, 250, 252);
-            ClientSize = new Size(625, 475);
+            ClientSize = new Size(665, 535);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterParent;
@@ -37,7 +37,7 @@ namespace ScheduleProject.Forms
                 AutoSize = true,
                 Font = new Font("맑은 고딕", 24F, FontStyle.Bold, GraphicsUnit.Point, 129),
                 ForeColor = Color.FromArgb(17, 24, 39),
-                Location = new Point(37, 24),
+                Location = new Point(42, 28),
                 Text = "지출 수정"
             };
 
@@ -46,7 +46,7 @@ namespace ScheduleProject.Forms
                 AutoSize = true,
                 Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129),
                 ForeColor = Color.FromArgb(100, 116, 139),
-                Location = new Point(40, 70),
+                Location = new Point(46, 86),
                 Text = "선택한 지출 내역의 금액, 카테고리, 결제수단, 메모를 수정합니다."
             };
 
@@ -54,53 +54,53 @@ namespace ScheduleProject.Forms
             {
                 BackColor = Color.White,
                 BorderStyle = BorderStyle.FixedSingle,
-                Location = new Point(40, 105),
-                Size = new Size(545, 270)
+                Location = new Point(44, 126),
+                Size = new Size(577, 292)
             };
 
-            AddLabel(panelInput, "지출명", new Point(28, 22));
+            AddLabel(panelInput, "지출명", new Point(32, 24));
             textTitle.BorderStyle = BorderStyle.FixedSingle;
             textTitle.Font = new Font("맑은 고딕", 10F);
-            textTitle.Location = new Point(120, 20);
-            textTitle.Size = new Size(396, 25);
+            textTitle.Location = new Point(32, 50);
+            textTitle.Size = new Size(510, 25);
 
-            AddLabel(panelInput, "금액", new Point(28, 66));
+            AddLabel(panelInput, "금액", new Point(32, 92));
             textAmount.BorderStyle = BorderStyle.FixedSingle;
             textAmount.Font = new Font("맑은 고딕", 10F);
-            textAmount.Location = new Point(28, 90);
-            textAmount.Size = new Size(215, 25);
+            textAmount.Location = new Point(32, 118);
+            textAmount.Size = new Size(225, 25);
 
-            AddLabel(panelInput, "카테고리", new Point(299, 66));
+            AddLabel(panelInput, "카테고리", new Point(304, 92));
             comboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboCategory.Font = new Font("맑은 고딕", 10F);
             comboCategory.Items.AddRange(new object[] { "식비", "교통", "쇼핑", "문화", "생활", "통신", "기타" });
-            comboCategory.Location = new Point(299, 90);
-            comboCategory.Size = new Size(216, 25);
+            comboCategory.Location = new Point(304, 118);
+            comboCategory.Size = new Size(238, 25);
 
-            AddLabel(panelInput, "결제 수단", new Point(28, 125));
+            AddLabel(panelInput, "결제 수단", new Point(32, 160));
             comboPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             comboPaymentMethod.Font = new Font("맑은 고딕", 10F);
             comboPaymentMethod.Items.AddRange(new object[] { "카드", "현금", "계좌이체", "간편결제", "기타" });
-            comboPaymentMethod.Location = new Point(28, 149);
-            comboPaymentMethod.Size = new Size(216, 25);
+            comboPaymentMethod.Location = new Point(32, 186);
+            comboPaymentMethod.Size = new Size(225, 25);
 
-            AddLabel(panelInput, "지출 날짜", new Point(299, 125));
+            AddLabel(panelInput, "지출 날짜", new Point(304, 160));
             dateExpense.Font = new Font("맑은 고딕", 10F);
             dateExpense.Format = DateTimePickerFormat.Short;
-            dateExpense.Location = new Point(299, 149);
-            dateExpense.Size = new Size(216, 25);
+            dateExpense.Location = new Point(304, 186);
+            dateExpense.Size = new Size(238, 25);
 
-            AddLabel(panelInput, "메모", new Point(28, 184));
+            AddLabel(panelInput, "메모", new Point(32, 226));
             textMemo.BorderStyle = BorderStyle.FixedSingle;
             textMemo.Font = new Font("맑은 고딕", 10F);
-            textMemo.Location = new Point(28, 208);
+            textMemo.Location = new Point(32, 250);
             textMemo.Multiline = true;
-            textMemo.Size = new Size(487, 38);
+            textMemo.Size = new Size(510, 32);
 
             checkIsFixed.AutoSize = true;
             checkIsFixed.Font = new Font("맑은 고딕", 10F);
             checkIsFixed.ForeColor = Color.FromArgb(51, 65, 85);
-            checkIsFixed.Location = new Point(28, 246);
+            checkIsFixed.Location = new Point(32, 284);
             checkIsFixed.Text = "매달 반복되는 고정 지출";
 
             panelInput.Controls.AddRange(new Control[]
@@ -114,9 +114,9 @@ namespace ScheduleProject.Forms
                 checkIsFixed
             });
 
-            ConfigurePrimaryButton(buttonSave, "수정 저장", new Point(394, 398), new Size(114, 33));
+            ConfigurePrimaryButton(buttonSave, "수정 저장", new Point(430, 452), new Size(110, 36));
             buttonSave.Click += buttonSave_Click;
-            ConfigureSecondaryButton(buttonCancel, "닫기", new Point(512, 398), new Size(73, 33));
+            ConfigureSecondaryButton(buttonCancel, "닫기", new Point(548, 452), new Size(73, 36));
             buttonCancel.Click += (_, _) => Close();
 
             Controls.AddRange(new Control[] { lblTitle, lblSubtitle, panelInput, buttonSave, buttonCancel });
@@ -142,7 +142,7 @@ namespace ScheduleProject.Forms
             button.BackColor = Color.FromArgb(37, 99, 235);
             button.FlatAppearance.BorderSize = 0;
             button.FlatStyle = FlatStyle.Flat;
-            button.Font = new Font("맑은 고딕", 11F, FontStyle.Bold);
+            button.Font = new Font("맑은 고딕", 10.5F, FontStyle.Regular);
             button.ForeColor = Color.White;
             button.UseVisualStyleBackColor = false;
         }
@@ -156,7 +156,7 @@ namespace ScheduleProject.Forms
             button.FlatAppearance.BorderColor = Color.FromArgb(148, 163, 184);
             button.FlatAppearance.BorderSize = 2;
             button.FlatStyle = FlatStyle.Flat;
-            button.Font = new Font("맑은 고딕", 11F, FontStyle.Bold);
+            button.Font = new Font("맑은 고딕", 10.5F, FontStyle.Regular);
             button.ForeColor = Color.FromArgb(51, 65, 85);
             button.UseVisualStyleBackColor = false;
         }
