@@ -111,8 +111,8 @@ namespace ScheduleProject.Forms
             AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 95);
             AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 55, DataGridViewContentAlignment.MiddleCenter);
             AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 190, DataGridViewContentAlignment.MiddleLeft, null, DataGridViewContentAlignment.MiddleLeft);
-            AddButtonColumn("Edit", "수정", "수정", 60);
-            AddButtonColumn("Delete", "삭제", "삭제", 60);
+            AddButtonColumn("Edit", "수정", 60);
+            AddButtonColumn("Delete", "삭제", 60);
         }
 
         private void WireEvents()
@@ -125,6 +125,7 @@ namespace ScheduleProject.Forms
             btnExportCsv.Click += (_, _) => ExportCsv();
             btnImportCsv.Click += (_, _) => ImportCsv();
             txtKeyword.KeyDown += TxtKeyword_KeyDown;
+            dgvExpenses.CellPainting += dgvExpenses_CellPainting;
         }
 
         private void LoadAllExpenses()
@@ -300,12 +301,12 @@ namespace ScheduleProject.Forms
             dgvExpenses.Columns.Add(column);
         }
 
-        private void AddButtonColumn(string name, string headerText, string buttonText, int width)
+        private void AddButtonColumn(string name, string buttonText, int width)
         {
             var column = new DataGridViewButtonColumn
             {
                 Name = name,
-                HeaderText = headerText,
+                HeaderText = "",
                 Text = buttonText,
                 UseColumnTextForButtonValue = true,
                 Width = width,
@@ -423,6 +424,51 @@ namespace ScheduleProject.Forms
             {
                 DeleteExpense(row.Id, row.Title);
             }
+        }
+
+        private void dgvExpenses_CellPainting(object? sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0 || e.Graphics == null)
+            {
+                return;
+            }
+
+            string columnName = dgvExpenses.Columns[e.ColumnIndex].Name;
+            if (columnName != "Edit" && columnName != "Delete")
+            {
+                return;
+            }
+
+            e.PaintBackground(e.CellBounds, true);
+
+            Rectangle buttonBounds = new Rectangle(
+                e.CellBounds.X + 8,
+                e.CellBounds.Y + 5,
+                e.CellBounds.Width - 16,
+                e.CellBounds.Height - 10);
+
+            bool isEdit = columnName == "Edit";
+            Color backColor = isEdit ? primaryColor : Color.White;
+            Color borderColor = isEdit ? primaryColor : Color.FromArgb(148, 163, 184);
+            Color textColor = isEdit ? Color.White : Color.FromArgb(51, 65, 85);
+            string text = isEdit ? "수정" : "삭제";
+
+            using var backgroundBrush = new SolidBrush(backColor);
+            using var borderPen = new Pen(borderColor, 1);
+            using var textBrush = new SolidBrush(textColor);
+
+            e.Graphics.FillRectangle(backgroundBrush, buttonBounds);
+            e.Graphics.DrawRectangle(borderPen, buttonBounds);
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                text,
+                new Font("맑은 고딕", 8.5F, FontStyle.Bold),
+                buttonBounds,
+                textColor,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            e.Handled = true;
         }
 
         private void EditExpense(int expenseId)
