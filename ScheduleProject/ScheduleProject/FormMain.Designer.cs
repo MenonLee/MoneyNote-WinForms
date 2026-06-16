@@ -50,6 +50,7 @@ namespace ScheduleProject
             lblExitTitle = new Label();
             lblExitDesc = new Label();
             panelDashboard = new Panel();
+            buttonDashboardRefresh = new Button();
             lblAiCommentText = new Label();
             lblAiCommentTitle = new Label();
             panelRecentExpenses = new Panel();
@@ -365,6 +366,7 @@ namespace ScheduleProject
             // 
             panelDashboard.BackColor = Color.White;
             panelDashboard.BorderStyle = BorderStyle.FixedSingle;
+            panelDashboard.Controls.Add(buttonDashboardRefresh);
             panelDashboard.Controls.Add(lblAiCommentText);
             panelDashboard.Controls.Add(lblAiCommentTitle);
             panelDashboard.Controls.Add(panelRecentExpenses);
@@ -379,6 +381,21 @@ namespace ScheduleProject
             panelDashboard.Name = "panelDashboard";
             panelDashboard.Size = new Size(688, 520);
             panelDashboard.TabIndex = 22;
+            // 
+            // buttonDashboardRefresh
+            // 
+            buttonDashboardRefresh.BackColor = Color.FromArgb(37, 99, 235);
+            buttonDashboardRefresh.FlatAppearance.BorderSize = 0;
+            buttonDashboardRefresh.FlatStyle = FlatStyle.Flat;
+            buttonDashboardRefresh.Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            buttonDashboardRefresh.ForeColor = Color.White;
+            buttonDashboardRefresh.Location = new Point(541, 24);
+            buttonDashboardRefresh.Name = "buttonDashboardRefresh";
+            buttonDashboardRefresh.Size = new Size(107, 32);
+            buttonDashboardRefresh.TabIndex = 10;
+            buttonDashboardRefresh.Text = "새로고침";
+            buttonDashboardRefresh.UseVisualStyleBackColor = false;
+            buttonDashboardRefresh.Click += buttonDashboardRefresh_Click;
             // 
             // lblAiCommentText
             // 
@@ -850,5 +867,6 @@ namespace ScheduleProject
         private Label lblChartFood;
         private Label lblAiCommentTitle;
         private Label lblAiCommentText;
+        private Button buttonDashboardRefresh;
     }
 }
