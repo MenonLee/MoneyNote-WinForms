@@ -65,6 +65,26 @@ namespace ScheduleProject.Forms
             AddTextColumn(nameof(FixedExpenseItem.PaymentMethod), "결제수단", 105, DataGridViewContentAlignment.MiddleCenter);
             AddTextColumn(nameof(FixedExpenseItem.Memo), "메모", 180, DataGridViewContentAlignment.MiddleLeft);
             AddDeleteButtonColumn();
+            FitGridColumnsToCompactWidth();
+        }
+
+        private void FitGridColumnsToCompactWidth()
+        {
+            SetColumnWidth(nameof(FixedExpenseItem.Title), 130);
+            SetColumnWidth(nameof(FixedExpenseItem.Amount), 90);
+            SetColumnWidth(nameof(FixedExpenseItem.DayOfMonth), 65);
+            SetColumnWidth(nameof(FixedExpenseItem.Category), 85);
+            SetColumnWidth(nameof(FixedExpenseItem.PaymentMethod), 90);
+            SetColumnWidth(nameof(FixedExpenseItem.Memo), 160);
+            SetColumnWidth("DeleteAction", 60);
+        }
+
+        private void SetColumnWidth(string columnName, int width)
+        {
+            if (dgvFixedExpenses.Columns[columnName] is DataGridViewColumn column)
+            {
+                column.Width = width;
+            }
         }
 
         private void AddTextColumn(string propertyName, string headerText, int width, DataGridViewContentAlignment alignment, string? format = null)
