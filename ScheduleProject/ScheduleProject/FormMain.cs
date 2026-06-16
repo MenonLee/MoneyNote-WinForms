@@ -1,4 +1,5 @@
 using System.Drawing;
+using ScheduleProject.Forms;
 using ScheduleProject.Data;
 using ScheduleProject.Models;
 using ScheduleProject.Services;
@@ -246,7 +247,15 @@ namespace ScheduleProject
         private void buttonTaskList_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("지출 내역/검색 화면 연결 예정");
+
+            using (var form = new FormExpenseList())
+            {
+                form.ShowDialog(this);
+                if (form.HasChangedExpenses)
+                {
+                    LoadDashboard();
+                }
+            }
         }
 
         private void buttonEditTask_Click(object sender, EventArgs e)
