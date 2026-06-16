@@ -27,6 +27,11 @@ namespace ScheduleProject
             buttonRefresh.Text = "새로고침";
             buttonClose.Text = "닫기";
 
+            lblTitle.AutoSize = false;
+            lblTitle.Location = new Point(44, 28);
+            lblTitle.Size = new Size(260, 60);
+            lblSubtitle.Location = new Point(47, 95);
+            lblCategoryTitle.Visible = false;
             dgvCategory.Visible = false;
             panelCategory.Paint += panelCategory_Paint;
         }
@@ -75,12 +80,13 @@ namespace ScheduleProject
             using var textBrush = new SolidBrush(Color.FromArgb(30, 41, 59));
             using var mutedBrush = new SolidBrush(Color.FromArgb(100, 116, 139));
 
-            var categoryBounds = new Rectangle(24, 58, 380, 292);
-            var monthlyBounds = new Rectangle(452, 58, 360, 292);
+            int dividerX = panelCategory.ClientSize.Width / 2;
+            var categoryBounds = new Rectangle(24, 62, dividerX - 52, panelCategory.ClientSize.Height - 100);
+            var monthlyBounds = new Rectangle(dividerX + 34, 62, panelCategory.ClientSize.Width - dividerX - 66, panelCategory.ClientSize.Height - 100);
 
             e.Graphics.DrawString("카테고리별 지출", titleFont, textBrush, categoryBounds.X, 18);
             e.Graphics.DrawString("최근 6개월 지출", titleFont, textBrush, monthlyBounds.X, 18);
-            e.Graphics.DrawLine(axisPen, 426, 58, 426, 350);
+            e.Graphics.DrawLine(axisPen, dividerX, 58, dividerX, panelCategory.ClientSize.Height - 26);
 
             DrawCategoryBars(e.Graphics, categoryBounds, labelFont, valueFont, textBrush, mutedBrush);
             DrawMonthlyBars(e.Graphics, monthlyBounds, labelFont, valueFont, textBrush, mutedBrush, axisPen);
