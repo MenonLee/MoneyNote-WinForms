@@ -30,19 +30,19 @@ namespace ScheduleProject
         public static List<ExpenseItem> ImportExpenses(string filePath)
         {
             var expenses = new List<ExpenseItem>();
-            var lines = File.ReadAllLines(filePath, Encoding.UTF8);
+            var records = ReadCsvRecords(filePath).ToList();
 
-            for (int i = 1; i < lines.Length; i++)
+            for (int i = 1; i < records.Count; i++)
             {
-                if (string.IsNullOrWhiteSpace(lines[i]))
+                var columns = records[i];
+                if (columns.All(string.IsNullOrWhiteSpace))
                 {
                     continue;
                 }
 
-                var columns = ParseLine(lines[i]);
                 if (columns.Count < 6)
                 {
-                    throw new InvalidDataException($"{i + 1}번째 줄의 CSV 형식이 올바르지 않습니다.");
+                    throw new InvalidDataException($"{i + 1}번째 CSV 레코드 형식이 올바르지 않습니다.");
                 }
 
                 expenses.Add(new ExpenseItem
@@ -73,22 +73,25 @@ namespace ScheduleProject
             return "\"" + value.Replace("\"", "\"\"") + "\"";
         }
 
-        private static List<string> ParseLine(string line)
+        private static IEnumerable<List<string>> ReadCsvRecords(string filePath)
         {
+            using var reader = new StreamReader(filePath, Encoding.UTF8, true);
             var values = new List<string>();
             var builder = new StringBuilder();
             bool insideQuote = false;
+            bool hasData = false;
 
-            for (int i = 0; i < line.Length; i++)
+            while (reader.Read() is int read && read >= 0)
             {
-                char current = line[i];
+                char current = (char)read;
+                hasData = true;
 
                 if (current == '"')
                 {
-                    if (insideQuote && i + 1 < line.Length && line[i + 1] == '"')
+                    if (insideQuote && reader.Peek() == '"')
                     {
                         builder.Append('"');
-                        i++;
+                        reader.Read();
                     }
                     else
                     {
@@ -100,14 +103,36 @@ namespace ScheduleProject
                     values.Add(builder.ToString());
                     builder.Clear();
                 }
+                else if ((current == '\r' || current == '\n') && !insideQuote)
+                {
+                    if (current == '\r' && reader.Peek() == '\n')
+                    {
+                        reader.Read();
+                    }
+
+                    values.Add(builder.ToString());
+                    yield return values;
+
+                    values = new List<string>();
+                    builder.Clear();
+                    hasData = false;
+                }
                 else
                 {
                     builder.Append(current);
                 }
             }
 
-            values.Add(builder.ToString());
-            return values;
+            if (insideQuote)
+            {
+                throw new InvalidDataException("CSV 따옴표가 닫히지 않았습니다.");
+            }
+
+            if (hasData || values.Count > 0 || builder.Length > 0)
+            {
+                values.Add(builder.ToString());
+                yield return values;
+            }
         }
     }
 }

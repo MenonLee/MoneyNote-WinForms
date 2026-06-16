@@ -19,6 +19,8 @@ namespace ScheduleProject.Forms
 
         private List<ExpenseItem> currentExpenses = new();
 
+        public bool HasImportedExpenses { get; private set; }
+
         public FormExpenseList()
         {
             InitializeComponent();
@@ -213,6 +215,7 @@ namespace ScheduleProject.Forms
                 }
 
                 LoadAllExpenses();
+                HasImportedExpenses = importedExpenses.Count > 0;
                 MessageBox.Show($"{importedExpenses.Count}건의 지출을 가져왔습니다.", "CSV 가져오기", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
