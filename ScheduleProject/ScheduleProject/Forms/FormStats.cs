@@ -27,15 +27,40 @@ namespace ScheduleProject
             buttonRefresh.Text = "새로고침";
             buttonClose.Text = "닫기";
 
+            ClientSize = new Size(990, 760);
             lblTitle.AutoSize = false;
-            lblTitle.Location = new Point(44, 28);
-            lblTitle.Size = new Size(260, 60);
+            lblTitle.Location = new Point(44, 24);
+            lblTitle.Size = new Size(320, 66);
             lblSubtitle.AutoSize = false;
-            lblSubtitle.Location = new Point(47, 74);
-            lblSubtitle.Size = new Size(620, 34);
+            lblSubtitle.Location = new Point(48, 102);
+            lblSubtitle.Size = new Size(720, 30);
             lblCategoryTitle.Visible = false;
             dgvCategory.Visible = false;
+            LayoutSummaryCards();
+            panelCategory.Location = new Point(48, 274);
+            panelCategory.Size = new Size(890, 390);
+            buttonRefresh.Location = new Point(598, 684);
+            buttonClose.Location = new Point(764, 684);
             panelCategory.Paint += panelCategory_Paint;
+        }
+
+        private void LayoutSummaryCards()
+        {
+            const int top = 150;
+            const int left = 48;
+            const int width = 204;
+            const int height = 104;
+            const int gap = 18;
+
+            panelTotalCount.Location = new Point(left, top);
+            panelTotalAmount.Location = new Point(left + (width + gap), top);
+            panelMonthlyAmount.Location = new Point(left + (width + gap) * 2, top);
+            panelAverageAmount.Location = new Point(left + (width + gap) * 3, top);
+
+            panelTotalCount.Size = new Size(width, height);
+            panelTotalAmount.Size = new Size(width, height);
+            panelMonthlyAmount.Size = new Size(width, height);
+            panelAverageAmount.Size = new Size(width, height);
         }
 
         private void LoadStats()
