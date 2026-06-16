@@ -45,6 +45,9 @@ namespace ScheduleProject
             panelList = new Panel();
             dgvBudgets = new DataGridView();
             lblListTitle = new Label();
+            panelSpent = new Panel();
+            dgvSpent = new DataGridView();
+            lblSpentTitle = new Label();
             buttonRefresh = new Button();
             buttonClose = new Button();
             panelMonth.SuspendLayout();
@@ -53,6 +56,8 @@ namespace ScheduleProject
             panelSummary.SuspendLayout();
             panelList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBudgets).BeginInit();
+            panelSpent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvSpent).BeginInit();
             SuspendLayout();
             // 
             // lblTitle
@@ -367,7 +372,7 @@ namespace ScheduleProject
             panelList.Controls.Add(lblListTitle);
             panelList.Location = new Point(32, 360);
             panelList.Name = "panelList";
-            panelList.Size = new Size(694, 196);
+            panelList.Size = new Size(340, 196);
             panelList.TabIndex = 6;
             // 
             // dgvBudgets
@@ -387,7 +392,7 @@ namespace ScheduleProject
             dgvBudgets.RowHeadersVisible = false;
             dgvBudgets.RowTemplate.Height = 34;
             dgvBudgets.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBudgets.Size = new Size(646, 124);
+            dgvBudgets.Size = new Size(292, 124);
             dgvBudgets.TabIndex = 1;
             // 
             // lblListTitle
@@ -400,6 +405,48 @@ namespace ScheduleProject
             lblListTitle.Size = new Size(141, 21);
             lblListTitle.TabIndex = 0;
             lblListTitle.Text = "현재 설정된 예산";
+            //
+            // panelSpent
+            //
+            panelSpent.BackColor = Color.White;
+            panelSpent.BorderStyle = BorderStyle.FixedSingle;
+            panelSpent.Controls.Add(dgvSpent);
+            panelSpent.Controls.Add(lblSpentTitle);
+            panelSpent.Location = new Point(386, 360);
+            panelSpent.Name = "panelSpent";
+            panelSpent.Size = new Size(340, 196);
+            panelSpent.TabIndex = 7;
+            //
+            // dgvSpent
+            //
+            dgvSpent.AllowUserToAddRows = false;
+            dgvSpent.AllowUserToDeleteRows = false;
+            dgvSpent.AllowUserToResizeRows = false;
+            dgvSpent.BackgroundColor = Color.White;
+            dgvSpent.BorderStyle = BorderStyle.None;
+            dgvSpent.ColumnHeadersHeight = 32;
+            dgvSpent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvSpent.GridColor = Color.FromArgb(226, 232, 240);
+            dgvSpent.Location = new Point(24, 50);
+            dgvSpent.MultiSelect = false;
+            dgvSpent.Name = "dgvSpent";
+            dgvSpent.ReadOnly = true;
+            dgvSpent.RowHeadersVisible = false;
+            dgvSpent.RowTemplate.Height = 34;
+            dgvSpent.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSpent.Size = new Size(292, 124);
+            dgvSpent.TabIndex = 1;
+            //
+            // lblSpentTitle
+            //
+            lblSpentTitle.AutoSize = true;
+            lblSpentTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblSpentTitle.ForeColor = Color.FromArgb(30, 41, 59);
+            lblSpentTitle.Location = new Point(24, 17);
+            lblSpentTitle.Name = "lblSpentTitle";
+            lblSpentTitle.Size = new Size(160, 21);
+            lblSpentTitle.TabIndex = 0;
+            lblSpentTitle.Text = "이번 달 소비한 예산";
             // 
             // buttonRefresh
             // 
@@ -440,6 +487,7 @@ namespace ScheduleProject
             ClientSize = new Size(760, 635);
             Controls.Add(buttonClose);
             Controls.Add(buttonRefresh);
+            Controls.Add(panelSpent);
             Controls.Add(panelList);
             Controls.Add(panelSummary);
             Controls.Add(panelCategory);
@@ -463,6 +511,9 @@ namespace ScheduleProject
             panelList.ResumeLayout(false);
             panelList.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBudgets).EndInit();
+            panelSpent.ResumeLayout(false);
+            panelSpent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvSpent).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -496,6 +547,9 @@ namespace ScheduleProject
         private Panel panelList;
         private DataGridView dgvBudgets;
         private Label lblListTitle;
+        private Panel panelSpent;
+        private DataGridView dgvSpent;
+        private Label lblSpentTitle;
         private Button buttonRefresh;
         private Button buttonClose;
     }

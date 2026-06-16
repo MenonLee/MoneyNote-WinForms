@@ -20,6 +20,7 @@ namespace ScheduleProject
         {
             InitializeComponent();
             SetupGrid();
+            SetupSpentGrid();
             comboCategory.Items.AddRange(categories);
             comboCategory.SelectedIndex = 0;
             dateBudgetMonth.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
@@ -55,7 +56,7 @@ namespace ScheduleProject
                     Name = "colType",
                     HeaderText = "구분",
                     DataPropertyName = "Type",
-                    Width = 140,
+                    Width = 120,
                     ReadOnly = true
                 },
                 new DataGridViewTextBoxColumn
@@ -63,7 +64,49 @@ namespace ScheduleProject
                     Name = "colAmount",
                     HeaderText = "예산 금액",
                     DataPropertyName = "DisplayAmount",
-                    Width = 180,
+                    Width = 150,
+                    ReadOnly = true
+                }
+            });
+        }
+
+        private void SetupSpentGrid()
+        {
+            dgvSpent.AutoGenerateColumns = false;
+            dgvSpent.ColumnHeadersDefaultCellStyle = new DataGridViewCellStyle
+            {
+                BackColor = Color.FromArgb(241, 245, 249),
+                Font = new Font("맑은 고딕", 9F, FontStyle.Bold, GraphicsUnit.Point, 129),
+                ForeColor = Color.FromArgb(51, 65, 85),
+                SelectionBackColor = Color.FromArgb(241, 245, 249),
+                SelectionForeColor = Color.FromArgb(51, 65, 85)
+            };
+            dgvSpent.DefaultCellStyle = new DataGridViewCellStyle
+            {
+                Font = new Font("맑은 고딕", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 129),
+                ForeColor = Color.FromArgb(30, 41, 59),
+                SelectionBackColor = Color.FromArgb(219, 234, 254),
+                SelectionForeColor = Color.FromArgb(30, 64, 175),
+                Padding = new Padding(6, 0, 0, 0)
+            };
+            dgvSpent.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvSpent.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvSpent.Columns.AddRange(new DataGridViewColumn[]
+            {
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "colSpentType",
+                    HeaderText = "구분",
+                    DataPropertyName = "Type",
+                    Width = 120,
+                    ReadOnly = true
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    Name = "colSpentAmount",
+                    HeaderText = "소비 금액",
+                    DataPropertyName = "DisplayAmount",
+                    Width = 150,
                     ReadOnly = true
                 }
             });
@@ -76,6 +119,7 @@ namespace ScheduleProject
             int monthlyExpense = DatabaseHelper.GetMonthlyExpenseAmount(year, month);
             int monthlyBudget = DatabaseHelper.GetMonthlyBudget(year, month);
             var categoryBudgets = DatabaseHelper.GetCategoryBudgets(year, month);
+            var categorySpending = DatabaseHelper.GetCategorySpending(year, month);
             var budgets = DatabaseHelper.GetMonthlyBudgets(year, month);
 
             textMonthlyBudget.Text = monthlyBudget > 0 ? monthlyBudget.ToString() : "";
@@ -95,6 +139,25 @@ namespace ScheduleProject
                     DisplayAmount = FormatCurrency(b.Amount)
                 })
                 .ToList();
+
+            var spentRows = new List<object>
+            {
+                new
+                {
+                    Type = "전체 지출",
+                    DisplayAmount = FormatCurrency(monthlyExpense)
+                }
+            };
+
+            spentRows.AddRange(categorySpending
+                .OrderByDescending(item => item.Value)
+                .Select(item => new
+                {
+                    Type = item.Key,
+                    DisplayAmount = FormatCurrency(item.Value)
+                }));
+
+            dgvSpent.DataSource = spentRows;
         }
 
         private void buttonSaveMonthly_Click(object sender, EventArgs e)
