@@ -57,6 +57,7 @@ namespace ScheduleProject.Forms
             dgvFixedExpenses.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvFixedExpenses.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvFixedExpenses.EnableHeadersVisualStyles = false;
+            dgvFixedExpenses.ScrollBars = ScrollBars.Vertical;
 
             AddTextColumn(nameof(FixedExpenseItem.Title), "지출명", 150, DataGridViewContentAlignment.MiddleLeft);
             AddTextColumn(nameof(FixedExpenseItem.Amount), "금액", 105, DataGridViewContentAlignment.MiddleRight, "N0");
@@ -70,13 +71,13 @@ namespace ScheduleProject.Forms
 
         private void FitGridColumnsToCompactWidth()
         {
-            SetColumnWidth(nameof(FixedExpenseItem.Title), 130);
+            SetColumnWidth(nameof(FixedExpenseItem.Title), 140);
             SetColumnWidth(nameof(FixedExpenseItem.Amount), 90);
-            SetColumnWidth(nameof(FixedExpenseItem.DayOfMonth), 65);
-            SetColumnWidth(nameof(FixedExpenseItem.Category), 85);
-            SetColumnWidth(nameof(FixedExpenseItem.PaymentMethod), 90);
-            SetColumnWidth(nameof(FixedExpenseItem.Memo), 160);
-            SetColumnWidth("DeleteAction", 60);
+            SetColumnWidth(nameof(FixedExpenseItem.DayOfMonth), 60);
+            SetColumnWidth(nameof(FixedExpenseItem.Category), 95);
+            SetColumnWidth(nameof(FixedExpenseItem.PaymentMethod), 95);
+            SetColumnWidth(nameof(FixedExpenseItem.Memo), 165);
+            SetColumnWidth("DeleteAction", 56);
         }
 
         private void SetColumnWidth(string columnName, int width)
