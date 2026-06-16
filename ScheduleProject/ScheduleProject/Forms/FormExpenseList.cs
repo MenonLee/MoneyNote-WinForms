@@ -91,11 +91,13 @@ namespace ScheduleProject.Forms
             dgvExpenses.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(241, 245, 249);
             dgvExpenses.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
             dgvExpenses.ColumnHeadersDefaultCellStyle.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
+            dgvExpenses.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvExpenses.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 245, 249);
             dgvExpenses.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(30, 41, 59);
 
             dgvExpenses.DefaultCellStyle.Font = new Font("맑은 고딕", 9.5F);
             dgvExpenses.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            dgvExpenses.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvExpenses.DefaultCellStyle.SelectionBackColor = Color.FromArgb(219, 234, 254);
             dgvExpenses.DefaultCellStyle.SelectionForeColor = textColor;
             dgvExpenses.DefaultCellStyle.Padding = new Padding(4, 0, 0, 0);
@@ -103,7 +105,7 @@ namespace ScheduleProject.Forms
             dgvExpenses.Columns.Clear();
             AddGridColumn(nameof(ExpenseListRow.Date), "날짜", 100);
             AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 190);
-            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 105, DataGridViewContentAlignment.MiddleRight, "N0");
+            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 105, DataGridViewContentAlignment.MiddleCenter, "N0");
             AddGridColumn(nameof(ExpenseListRow.Category), "카테고리", 95);
             AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 105);
             AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 65, DataGridViewContentAlignment.MiddleCenter);
@@ -269,7 +271,7 @@ namespace ScheduleProject.Forms
             string propertyName,
             string headerText,
             int width,
-            DataGridViewContentAlignment alignment = DataGridViewContentAlignment.MiddleLeft,
+            DataGridViewContentAlignment alignment = DataGridViewContentAlignment.MiddleCenter,
             string? format = null)
         {
             var column = new DataGridViewTextBoxColumn
