@@ -10,143 +10,326 @@ namespace ScheduleProject.Forms
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
-            this.dgvFixedExpenses = new System.Windows.Forms.DataGridView();
-            this.txtTitle = new System.Windows.Forms.TextBox();
-            this.numAmount = new System.Windows.Forms.NumericUpDown();
-            this.numDay = new System.Windows.Forms.NumericUpDown();
-            this.cmbCategory = new System.Windows.Forms.ComboBox();
-            this.cmbPayment = new System.Windows.Forms.ComboBox();
-            this.txtMemo = new System.Windows.Forms.TextBox();
-            this.chkIsActive = new System.Windows.Forms.CheckBox();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblAmount = new System.Windows.Forms.Label();
-            this.lblDay = new System.Windows.Forms.Label();
-            this.lblCategory = new System.Windows.Forms.Label();
-            this.lblPayment = new System.Windows.Forms.Label();
-            this.lblMemo = new System.Windows.Forms.Label();
-            this.grpInput = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFixedExpenses)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDay)).BeginInit();
-            this.grpInput.SuspendLayout();
-            this.SuspendLayout();
-
-            // dgvFixedExpenses
-            this.dgvFixedExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvFixedExpenses.Location = new System.Drawing.Point(12, 12);
-            this.dgvFixedExpenses.Name = "dgvFixedExpenses";
-            this.dgvFixedExpenses.ReadOnly = true;
-            this.dgvFixedExpenses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFixedExpenses.Size = new System.Drawing.Size(460, 420);
-            this.dgvFixedExpenses.TabIndex = 0;
-
-            // grpInput
-            this.grpInput.Controls.Add(this.lblTitle);
-            this.grpInput.Controls.Add(this.txtTitle);
-            this.grpInput.Controls.Add(this.lblAmount);
-            this.grpInput.Controls.Add(this.numAmount);
-            this.grpInput.Controls.Add(this.lblDay);
-            this.grpInput.Controls.Add(this.numDay);
-            this.grpInput.Controls.Add(this.lblCategory);
-            this.grpInput.Controls.Add(this.cmbCategory);
-            this.grpInput.Controls.Add(this.lblPayment);
-            this.grpInput.Controls.Add(this.cmbPayment);
-            this.grpInput.Controls.Add(this.lblMemo);
-            this.grpInput.Controls.Add(this.txtMemo);
-            this.grpInput.Controls.Add(this.chkIsActive);
-            this.grpInput.Controls.Add(this.btnAdd);
-            this.grpInput.Controls.Add(this.btnUpdate);
-            this.grpInput.Controls.Add(this.btnDelete);
-            this.grpInput.Location = new System.Drawing.Point(485, 12);
-            this.grpInput.Name = "grpInput";
-            this.grpInput.Size = new System.Drawing.Size(280, 420);
-            this.grpInput.TabIndex = 1;
-            this.grpInput.TabStop = false;
-            this.grpInput.Text = "항목 정보 입력";
-
-            // Labels and Inputs positioning
-            int labelX = 15, inputX = 15, width = 250;
-            
-            this.lblTitle.Text = "지출명"; this.lblTitle.Location = new System.Drawing.Point(labelX, 30);
-            this.txtTitle.Location = new System.Drawing.Point(inputX, 50); this.txtTitle.Size = new System.Drawing.Size(width, 23);
-
-            this.lblAmount.Text = "금액"; this.lblAmount.Location = new System.Drawing.Point(labelX, 85);
-            this.numAmount.Location = new System.Drawing.Point(inputX, 105); this.numAmount.Size = new System.Drawing.Size(width, 23);
-            this.numAmount.Maximum = 100000000;
-
-            this.lblDay.Text = "발생일 (매월)"; this.lblDay.Location = new System.Drawing.Point(labelX, 140);
-            this.numDay.Location = new System.Drawing.Point(inputX, 160); this.numDay.Size = new System.Drawing.Size(width, 23);
-            this.numDay.Minimum = 1; this.numDay.Maximum = 31;
-
-            this.lblCategory.Text = "카테고리"; this.lblCategory.Location = new System.Drawing.Point(labelX, 195);
-            this.cmbCategory.Location = new System.Drawing.Point(inputX, 215); this.cmbCategory.Size = new System.Drawing.Size(120, 23);
-            this.cmbCategory.Items.AddRange(new object[] { "식비", "주거", "통신", "교통", "문화/생활", "보험", "기타" });
-
-            this.lblPayment.Text = "결제수단"; this.lblPayment.Location = new System.Drawing.Point(145, 195);
-            this.cmbPayment.Location = new System.Drawing.Point(145, 215); this.cmbPayment.Size = new System.Drawing.Size(120, 23);
-            this.cmbPayment.Items.AddRange(new object[] { "카드", "현금", "계좌이체" });
-
-            this.lblMemo.Text = "메모"; this.lblMemo.Location = new System.Drawing.Point(labelX, 250);
-            this.txtMemo.Location = new System.Drawing.Point(inputX, 270); this.txtMemo.Size = new System.Drawing.Size(width, 60);
-            this.txtMemo.Multiline = true;
-
+            lblTitle = new Label();
+            lblSubtitle = new Label();
+            panelInput = new Panel();
+            btnAdd = new Button();
+            chkIsActive = new CheckBox();
+            txtMemo = new TextBox();
+            lblMemo = new Label();
+            cmbPayment = new ComboBox();
+            lblPayment = new Label();
+            cmbCategory = new ComboBox();
+            lblCategory = new Label();
+            cmbDay = new ComboBox();
+            lblDay = new Label();
+            txtAmount = new TextBox();
+            lblAmount = new Label();
+            txtTitle = new TextBox();
+            lblExpenseTitle = new Label();
+            panelList = new Panel();
+            dgvFixedExpenses = new DataGridView();
+            lblListTitle = new Label();
+            panelInput.SuspendLayout();
+            panelList.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvFixedExpenses).BeginInit();
+            SuspendLayout();
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("맑은 고딕", 22F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblTitle.ForeColor = Color.FromArgb(17, 24, 39);
+            lblTitle.Location = new Point(32, 24);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(134, 41);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "고정지출";
+            // 
+            // lblSubtitle
+            // 
+            lblSubtitle.AutoSize = true;
+            lblSubtitle.Font = new Font("맑은 고딕", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            lblSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblSubtitle.Location = new Point(36, 68);
+            lblSubtitle.Name = "lblSubtitle";
+            lblSubtitle.Size = new Size(327, 17);
+            lblSubtitle.TabIndex = 1;
+            lblSubtitle.Text = "매달 반복되는 구독료, 통신비, 보험료를 관리합니다.";
+            // 
+            // panelInput
+            // 
+            panelInput.BackColor = Color.White;
+            panelInput.BorderStyle = BorderStyle.FixedSingle;
+            panelInput.Controls.Add(btnAdd);
+            panelInput.Controls.Add(chkIsActive);
+            panelInput.Controls.Add(txtMemo);
+            panelInput.Controls.Add(lblMemo);
+            panelInput.Controls.Add(cmbPayment);
+            panelInput.Controls.Add(lblPayment);
+            panelInput.Controls.Add(cmbCategory);
+            panelInput.Controls.Add(lblCategory);
+            panelInput.Controls.Add(cmbDay);
+            panelInput.Controls.Add(lblDay);
+            panelInput.Controls.Add(txtAmount);
+            panelInput.Controls.Add(lblAmount);
+            panelInput.Controls.Add(txtTitle);
+            panelInput.Controls.Add(lblExpenseTitle);
+            panelInput.Location = new Point(32, 104);
+            panelInput.Name = "panelInput";
+            panelInput.Size = new Size(796, 162);
+            panelInput.TabIndex = 2;
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.FromArgb(37, 99, 235);
+            btnAdd.FlatAppearance.BorderSize = 0;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(676, 108);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(88, 34);
+            btnAdd.TabIndex = 13;
+            btnAdd.Text = "등록";
+            btnAdd.UseVisualStyleBackColor = false;
+            // 
             // chkIsActive
-            this.chkIsActive.Text = "고정지출 활성화 (자동 생성)";
-            this.chkIsActive.Location = new System.Drawing.Point(inputX, 335);
-            this.chkIsActive.Size = new System.Drawing.Size(width, 23);
-            this.chkIsActive.Checked = true;
-
-            // Buttons
-            this.btnAdd.Text = "추가"; this.btnAdd.Location = new System.Drawing.Point(15, 365); this.btnAdd.Size = new System.Drawing.Size(80, 40);
-            this.btnAdd.BackColor = System.Drawing.Color.LightGreen;
-
-            this.btnUpdate.Text = "수정"; this.btnUpdate.Location = new System.Drawing.Point(100, 365); this.btnUpdate.Size = new System.Drawing.Size(80, 40);
-            this.btnUpdate.BackColor = System.Drawing.Color.LightBlue;
-
-            this.btnDelete.Text = "삭제"; this.btnDelete.Location = new System.Drawing.Point(185, 365); this.btnDelete.Size = new System.Drawing.Size(80, 40);
-            this.btnDelete.BackColor = System.Drawing.Color.LightPink;
-
+            // 
+            chkIsActive.AutoSize = true;
+            chkIsActive.Checked = true;
+            chkIsActive.CheckState = CheckState.Checked;
+            chkIsActive.Font = new Font("맑은 고딕", 9.5F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            chkIsActive.ForeColor = Color.FromArgb(51, 65, 85);
+            chkIsActive.Location = new Point(24, 116);
+            chkIsActive.Name = "chkIsActive";
+            chkIsActive.Size = new Size(164, 21);
+            chkIsActive.TabIndex = 12;
+            chkIsActive.Text = "매달 자동 생성 활성화";
+            chkIsActive.UseVisualStyleBackColor = true;
+            // 
+            // txtMemo
+            // 
+            txtMemo.BorderStyle = BorderStyle.FixedSingle;
+            txtMemo.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            txtMemo.Location = new Point(444, 48);
+            txtMemo.Name = "txtMemo";
+            txtMemo.PlaceholderText = "메모";
+            txtMemo.Size = new Size(320, 25);
+            txtMemo.TabIndex = 11;
+            // 
+            // lblMemo
+            // 
+            lblMemo.AutoSize = true;
+            lblMemo.Font = new Font("맑은 고딕", 9.5F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblMemo.ForeColor = Color.FromArgb(30, 41, 59);
+            lblMemo.Location = new Point(444, 26);
+            lblMemo.Name = "lblMemo";
+            lblMemo.Size = new Size(34, 17);
+            lblMemo.TabIndex = 10;
+            lblMemo.Text = "메모";
+            // 
+            // cmbPayment
+            // 
+            cmbPayment.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPayment.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            cmbPayment.FormattingEnabled = true;
+            cmbPayment.Items.AddRange(new object[] { "카드", "현금", "계좌이체", "간편결제", "기타" });
+            cmbPayment.Location = new Point(332, 48);
+            cmbPayment.Name = "cmbPayment";
+            cmbPayment.Size = new Size(96, 25);
+            cmbPayment.TabIndex = 9;
+            // 
+            // lblPayment
+            // 
+            lblPayment.AutoSize = true;
+            lblPayment.Font = new Font("맑은 고딕", 9.5F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblPayment.ForeColor = Color.FromArgb(30, 41, 59);
+            lblPayment.Location = new Point(332, 26);
+            lblPayment.Name = "lblPayment";
+            lblPayment.Size = new Size(60, 17);
+            lblPayment.TabIndex = 8;
+            lblPayment.Text = "결제수단";
+            // 
+            // cmbCategory
+            // 
+            cmbCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCategory.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            cmbCategory.FormattingEnabled = true;
+            cmbCategory.Items.AddRange(new object[] { "식비", "주거", "통신", "교통", "문화/생활", "보험", "기타" });
+            cmbCategory.Location = new Point(220, 48);
+            cmbCategory.Name = "cmbCategory";
+            cmbCategory.Size = new Size(96, 25);
+            cmbCategory.TabIndex = 7;
+            // 
+            // lblCategory
+            // 
+            lblCategory.AutoSize = true;
+            lblCategory.Font = new Font("맑은 고딕", 9.5F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblCategory.ForeColor = Color.FromArgb(30, 41, 59);
+            lblCategory.Location = new Point(220, 26);
+            lblCategory.Name = "lblCategory";
+            lblCategory.Size = new Size(60, 17);
+            lblCategory.TabIndex = 6;
+            lblCategory.Text = "카테고리";
+            // 
+            // cmbDay
+            // 
+            cmbDay.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbDay.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            cmbDay.FormattingEnabled = true;
+            cmbDay.Location = new Point(140, 48);
+            cmbDay.Name = "cmbDay";
+            cmbDay.Size = new Size(64, 25);
+            cmbDay.TabIndex = 5;
+            // 
+            // lblDay
+            // 
+            lblDay.AutoSize = true;
+            lblDay.Font = new Font("맑은 고딕", 9.5F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblDay.ForeColor = Color.FromArgb(30, 41, 59);
+            lblDay.Location = new Point(140, 26);
+            lblDay.Name = "lblDay";
+            lblDay.Size = new Size(47, 17);
+            lblDay.TabIndex = 4;
+            lblDay.Text = "발생일";
+            // 
+            // txtAmount
+            // 
+            txtAmount.BorderStyle = BorderStyle.FixedSingle;
+            txtAmount.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            txtAmount.Location = new Point(24, 48);
+            txtAmount.Name = "txtAmount";
+            txtAmount.PlaceholderText = "금액";
+            txtAmount.Size = new Size(100, 25);
+            txtAmount.TabIndex = 3;
+            // 
+            // lblAmount
+            // 
+            lblAmount.AutoSize = true;
+            lblAmount.Font = new Font("맑은 고딕", 9.5F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblAmount.ForeColor = Color.FromArgb(30, 41, 59);
+            lblAmount.Location = new Point(24, 26);
+            lblAmount.Name = "lblAmount";
+            lblAmount.Size = new Size(34, 17);
+            lblAmount.TabIndex = 2;
+            lblAmount.Text = "금액";
+            // 
+            // txtTitle
+            // 
+            txtTitle.BorderStyle = BorderStyle.FixedSingle;
+            txtTitle.Font = new Font("맑은 고딕", 10F, FontStyle.Regular, GraphicsUnit.Point, 129);
+            txtTitle.Location = new Point(24, 82);
+            txtTitle.Name = "txtTitle";
+            txtTitle.PlaceholderText = "지출명 예: 넷플릭스, 통신비";
+            txtTitle.Size = new Size(404, 25);
+            txtTitle.TabIndex = 1;
+            // 
+            // lblExpenseTitle
+            // 
+            lblExpenseTitle.AutoSize = true;
+            lblExpenseTitle.Font = new Font("맑은 고딕", 9.5F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblExpenseTitle.ForeColor = Color.FromArgb(30, 41, 59);
+            lblExpenseTitle.Location = new Point(24, 84);
+            lblExpenseTitle.Name = "lblExpenseTitle";
+            lblExpenseTitle.Size = new Size(0, 17);
+            lblExpenseTitle.TabIndex = 0;
+            // 
+            // panelList
+            // 
+            panelList.BackColor = Color.White;
+            panelList.BorderStyle = BorderStyle.FixedSingle;
+            panelList.Controls.Add(dgvFixedExpenses);
+            panelList.Controls.Add(lblListTitle);
+            panelList.Location = new Point(32, 284);
+            panelList.Name = "panelList";
+            panelList.Size = new Size(796, 230);
+            panelList.TabIndex = 3;
+            // 
+            // dgvFixedExpenses
+            // 
+            dgvFixedExpenses.AllowUserToAddRows = false;
+            dgvFixedExpenses.AllowUserToDeleteRows = false;
+            dgvFixedExpenses.AllowUserToResizeRows = false;
+            dgvFixedExpenses.BackgroundColor = Color.White;
+            dgvFixedExpenses.BorderStyle = BorderStyle.FixedSingle;
+            dgvFixedExpenses.ColumnHeadersHeight = 32;
+            dgvFixedExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvFixedExpenses.GridColor = Color.FromArgb(226, 232, 240);
+            dgvFixedExpenses.Location = new Point(24, 50);
+            dgvFixedExpenses.MultiSelect = false;
+            dgvFixedExpenses.Name = "dgvFixedExpenses";
+            dgvFixedExpenses.ReadOnly = true;
+            dgvFixedExpenses.RowHeadersVisible = false;
+            dgvFixedExpenses.RowTemplate.Height = 32;
+            dgvFixedExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvFixedExpenses.Size = new Size(746, 154);
+            dgvFixedExpenses.TabIndex = 1;
+            // 
+            // lblListTitle
+            // 
+            lblListTitle.AutoSize = true;
+            lblListTitle.Font = new Font("맑은 고딕", 12F, FontStyle.Bold, GraphicsUnit.Point, 129);
+            lblListTitle.ForeColor = Color.FromArgb(30, 41, 59);
+            lblListTitle.Location = new Point(24, 17);
+            lblListTitle.Name = "lblListTitle";
+            lblListTitle.Size = new Size(138, 21);
+            lblListTitle.TabIndex = 0;
+            lblListTitle.Text = "등록된 고정지출";
+            // 
             // FormFixedExpense
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 450);
-            this.Controls.Add(this.grpInput);
-            this.Controls.Add(this.dgvFixedExpenses);
-            this.Name = "FormFixedExpense";
-            this.Text = "고정지출 관리";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvFixedExpenses)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDay)).EndInit();
-            this.grpInput.ResumeLayout(false);
-            this.grpInput.PerformLayout();
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(248, 250, 252);
+            ClientSize = new Size(860, 540);
+            Controls.Add(panelList);
+            Controls.Add(panelInput);
+            Controls.Add(lblSubtitle);
+            Controls.Add(lblTitle);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "FormFixedExpense";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "MoneyNote - 고정지출 관리";
+            panelInput.ResumeLayout(false);
+            panelInput.PerformLayout();
+            panelList.ResumeLayout(false);
+            panelList.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvFixedExpenses).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
-        private System.Windows.Forms.DataGridView dgvFixedExpenses;
-        private System.Windows.Forms.GroupBox grpInput;
-        private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.NumericUpDown numAmount;
-        private System.Windows.Forms.NumericUpDown numDay;
-        private System.Windows.Forms.ComboBox cmbCategory;
-        private System.Windows.Forms.ComboBox cmbPayment;
-        private System.Windows.Forms.TextBox txtMemo;
-        private System.Windows.Forms.CheckBox chkIsActive;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.Label lblDay;
-        private System.Windows.Forms.Label lblCategory;
-        private System.Windows.Forms.Label lblPayment;
-        private System.Windows.Forms.Label lblMemo;
+        #endregion
+
+        private Label lblTitle;
+        private Label lblSubtitle;
+        private Panel panelInput;
+        private TextBox txtTitle;
+        private TextBox txtAmount;
+        private ComboBox cmbDay;
+        private ComboBox cmbCategory;
+        private ComboBox cmbPayment;
+        private TextBox txtMemo;
+        private CheckBox chkIsActive;
+        private Button btnAdd;
+        private Label lblExpenseTitle;
+        private Label lblAmount;
+        private Label lblDay;
+        private Label lblCategory;
+        private Label lblPayment;
+        private Label lblMemo;
+        private Panel panelList;
+        private DataGridView dgvFixedExpenses;
+        private Label lblListTitle;
     }
 }
