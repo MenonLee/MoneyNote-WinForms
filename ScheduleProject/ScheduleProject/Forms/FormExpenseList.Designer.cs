@@ -40,7 +40,8 @@ namespace ScheduleProject.Forms
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("맑은 고딕", 24F, FontStyle.Bold);
-            lblTitle.Location = new Point(40, 9);
+            lblTitle.ForeColor = Color.FromArgb(17, 24, 39);
+            lblTitle.Location = new Point(40, 28);
             lblTitle.Margin = new Padding(4, 0, 4, 0);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(197, 54);
@@ -51,7 +52,8 @@ namespace ScheduleProject.Forms
             // 
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("맑은 고딕", 10F);
-            lblSubtitle.Location = new Point(245, 35);
+            lblSubtitle.ForeColor = Color.FromArgb(100, 116, 139);
+            lblSubtitle.Location = new Point(44, 82);
             lblSubtitle.Margin = new Padding(4, 0, 4, 0);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(327, 23);
@@ -72,108 +74,109 @@ namespace ScheduleProject.Forms
             panelFilters.Controls.Add(comboCategory);
             panelFilters.Controls.Add(comboPaymentMethod);
             panelFilters.Controls.Add(btnSearch);
-            panelFilters.Location = new Point(1, 81);
+            panelFilters.BackColor = Color.White;
+            panelFilters.Location = new Point(40, 118);
             panelFilters.Name = "panelFilters";
-            panelFilters.Size = new Size(1081, 102);
+            panelFilters.Size = new Size(920, 112);
             panelFilters.TabIndex = 2;
             // 
             // btnAll
             // 
-            btnAll.Location = new Point(4, 4);
+            btnAll.Location = new Point(24, 16);
             btnAll.Margin = new Padding(4);
             btnAll.Name = "btnAll";
-            btnAll.Size = new Size(129, 43);
+            btnAll.Size = new Size(96, 34);
             btnAll.TabIndex = 3;
             btnAll.Text = "전체 내역";
             // 
             // btnToday
             // 
-            btnToday.Location = new Point(141, 4);
+            btnToday.Location = new Point(128, 16);
             btnToday.Margin = new Padding(4);
             btnToday.Name = "btnToday";
-            btnToday.Size = new Size(129, 43);
+            btnToday.Size = new Size(96, 34);
             btnToday.TabIndex = 4;
             btnToday.Text = "오늘 지출";
             // 
             // btnThisMonth
             // 
-            btnThisMonth.Location = new Point(278, 4);
+            btnThisMonth.Location = new Point(232, 16);
             btnThisMonth.Margin = new Padding(4);
             btnThisMonth.Name = "btnThisMonth";
-            btnThisMonth.Size = new Size(129, 43);
+            btnThisMonth.Size = new Size(96, 34);
             btnThisMonth.TabIndex = 5;
             btnThisMonth.Text = "이번 달";
             // 
             // dateFilter
             // 
             dateFilter.Format = DateTimePickerFormat.Short;
-            dateFilter.Location = new Point(415, 10);
+            dateFilter.Location = new Point(344, 20);
             dateFilter.Margin = new Padding(4);
             dateFilter.Name = "dateFilter";
-            dateFilter.Size = new Size(166, 27);
+            dateFilter.Size = new Size(132, 27);
             dateFilter.TabIndex = 6;
             // 
             // btnDateSearch
             // 
-            btnDateSearch.Location = new Point(589, 4);
+            btnDateSearch.Location = new Point(484, 16);
             btnDateSearch.Margin = new Padding(4);
             btnDateSearch.Name = "btnDateSearch";
-            btnDateSearch.Size = new Size(129, 43);
+            btnDateSearch.Size = new Size(96, 34);
             btnDateSearch.TabIndex = 7;
             btnDateSearch.Text = "날짜 검색";
             // 
             // btnImportCsv
             // 
-            btnImportCsv.Location = new Point(726, 10);
+            btnImportCsv.Location = new Point(760, 16);
             btnImportCsv.Margin = new Padding(4);
             btnImportCsv.Name = "btnImportCsv";
-            btnImportCsv.Size = new Size(113, 34);
+            btnImportCsv.Size = new Size(132, 34);
             btnImportCsv.TabIndex = 8;
             btnImportCsv.Text = "CSV 가져오기";
             // 
             // btnExportCsv
             // 
-            btnExportCsv.Location = new Point(847, 10);
+            btnExportCsv.Location = new Point(620, 16);
             btnExportCsv.Margin = new Padding(4);
             btnExportCsv.Name = "btnExportCsv";
-            btnExportCsv.Size = new Size(113, 34);
+            btnExportCsv.Size = new Size(132, 34);
             btnExportCsv.TabIndex = 9;
             btnExportCsv.Text = "CSV 내보내기";
             // 
             // txtKeyword
             // 
-            txtKeyword.Location = new Point(4, 55);
+            txtKeyword.Location = new Point(24, 66);
             txtKeyword.Margin = new Padding(4);
             txtKeyword.Name = "txtKeyword";
             txtKeyword.PlaceholderText = "검색어 (지출명, 메모)";
-            txtKeyword.Size = new Size(320, 27);
+            txtKeyword.Size = new Size(300, 27);
             txtKeyword.TabIndex = 10;
             txtKeyword.TextChanged += txtKeyword_TextChanged;
             // 
             // comboCategory
             // 
             comboCategory.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboCategory.Location = new Point(333, 55);
+            comboCategory.Location = new Point(340, 66);
             comboCategory.Margin = new Padding(4);
             comboCategory.Name = "comboCategory";
-            comboCategory.Size = new Size(192, 28);
+            comboCategory.Size = new Size(150, 28);
             comboCategory.TabIndex = 11;
             // 
             // comboPaymentMethod
             // 
             comboPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboPaymentMethod.Location = new Point(534, 55);
+            comboPaymentMethod.Location = new Point(506, 66);
             comboPaymentMethod.Margin = new Padding(4);
             comboPaymentMethod.Name = "comboPaymentMethod";
-            comboPaymentMethod.Size = new Size(192, 28);
+            comboPaymentMethod.Size = new Size(150, 28);
             comboPaymentMethod.TabIndex = 12;
             // 
             // btnSearch
             // 
-            btnSearch.Location = new Point(734, 52);
+            btnSearch.Location = new Point(760, 62);
             btnSearch.Margin = new Padding(4);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(129, 43);
+            btnSearch.Size = new Size(132, 34);
             btnSearch.TabIndex = 13;
             btnSearch.Text = "검색하기";
             btnSearch.UseVisualStyleBackColor = true;
@@ -182,11 +185,12 @@ namespace ScheduleProject.Forms
             // 
             dgvExpenses.BackgroundColor = Color.White;
             dgvExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvExpenses.Location = new Point(1, 189);
+            dgvExpenses.BorderStyle = BorderStyle.FixedSingle;
+            dgvExpenses.Location = new Point(40, 252);
             dgvExpenses.Name = "dgvExpenses";
             dgvExpenses.RowHeadersWidth = 51;
             dgvExpenses.RowTemplate.Height = 23;
-            dgvExpenses.Size = new Size(1081, 455);
+            dgvExpenses.Size = new Size(920, 330);
             dgvExpenses.TabIndex = 15;
             dgvExpenses.CellContentClick += dgvExpenses_CellContentClick;
             // 
@@ -194,13 +198,16 @@ namespace ScheduleProject.Forms
             // 
             AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1100, 700);
+            BackColor = Color.FromArgb(248, 250, 252);
+            ClientSize = new Size(1000, 630);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Controls.Add(dgvExpenses);
             Controls.Add(panelFilters);
             Controls.Add(lblSubtitle);
             Controls.Add(lblTitle);
             Margin = new Padding(4);
             Name = "FormExpenseList";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "MoneyNote - 지출 목록";
             Load += FormExpenseList_Load;
             panelFilters.ResumeLayout(false);

@@ -25,9 +25,10 @@ namespace ScheduleProject.Forms
         {
             InitializeComponent();
 
-            this.Size = new Size(1100, 700);
-            this.MinimumSize = new Size(1000, 650);
-            this.StartPosition = FormStartPosition.CenterScreen;
+            Size = new Size(1000, 630);
+            MinimumSize = new Size(1000, 630);
+            MaximumSize = new Size(1000, 630);
+            StartPosition = FormStartPosition.CenterParent;
 
             ApplyCustomStyles();
             WireEvents();
@@ -42,14 +43,20 @@ namespace ScheduleProject.Forms
             lblSubtitle.ForeColor = mutedTextColor;
 
             panelFilters.BackColor = panelBackColor;
+            panelFilters.Padding = new Padding(0);
 
             comboCategory.Items.Clear();
             comboCategory.Items.AddRange(new object[] { "카테고리: 전체", "식비", "교통", "쇼핑", "문화", "생활", "통신", "기타" });
             comboCategory.SelectedIndex = 0;
+            comboCategory.Font = new Font("맑은 고딕", 9.5F);
 
             comboPaymentMethod.Items.Clear();
             comboPaymentMethod.Items.AddRange(new object[] { "결제수단: 전체", "카드", "현금", "계좌이체", "간편결제", "기타" });
             comboPaymentMethod.SelectedIndex = 0;
+            comboPaymentMethod.Font = new Font("맑은 고딕", 9.5F);
+
+            txtKeyword.Font = new Font("맑은 고딕", 9.5F);
+            dateFilter.Font = new Font("맑은 고딕", 9.5F);
 
             ConfigurePrimaryButton(btnSearch, "검색하기");
             ConfigureSecondaryButton(btnAll, "전체 내역");
@@ -66,16 +73,32 @@ namespace ScheduleProject.Forms
         {
             dgvExpenses.AutoGenerateColumns = false;
             dgvExpenses.EnableHeadersVisualStyles = false;
-            dgvExpenses.ColumnHeadersVisible = false; // Hide the header row (id, date, title etc.)
+            dgvExpenses.ColumnHeadersVisible = true;
+            dgvExpenses.ColumnHeadersHeight = 34;
+            dgvExpenses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvExpenses.GridColor = Color.FromArgb(226, 232, 240);
             dgvExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvExpenses.RowHeadersVisible = false;
             dgvExpenses.AllowUserToAddRows = false;
+            dgvExpenses.AllowUserToDeleteRows = false;
+            dgvExpenses.AllowUserToResizeRows = false;
             dgvExpenses.ReadOnly = true;
+            dgvExpenses.RowTemplate.Height = 32;
+            dgvExpenses.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvExpenses.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 
+            dgvExpenses.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(241, 245, 249);
+            dgvExpenses.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
+            dgvExpenses.ColumnHeadersDefaultCellStyle.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
+            dgvExpenses.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(241, 245, 249);
+            dgvExpenses.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(30, 41, 59);
+
+            dgvExpenses.DefaultCellStyle.Font = new Font("맑은 고딕", 9.5F);
+            dgvExpenses.DefaultCellStyle.ForeColor = Color.FromArgb(30, 41, 59);
             dgvExpenses.DefaultCellStyle.SelectionBackColor = Color.FromArgb(219, 234, 254);
             dgvExpenses.DefaultCellStyle.SelectionForeColor = textColor;
+            dgvExpenses.DefaultCellStyle.Padding = new Padding(4, 0, 0, 0);
 
             dgvExpenses.Columns.Clear();
             AddGridColumn(nameof(ExpenseListRow.Id), "번호", 55);
@@ -310,6 +333,7 @@ namespace ScheduleProject.Forms
             button.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
             button.ForeColor = Color.White;
             button.UseVisualStyleBackColor = false;
+            button.Cursor = Cursors.Hand;
         }
 
         private void ConfigureSecondaryButton(Button button, string text)
@@ -323,6 +347,7 @@ namespace ScheduleProject.Forms
             button.Font = new Font("맑은 고딕", 9F, FontStyle.Bold);
             button.ForeColor = Color.FromArgb(51, 65, 85);
             button.UseVisualStyleBackColor = false;
+            button.Cursor = Cursors.Hand;
         }
 
         private void ShowError(Exception ex)
