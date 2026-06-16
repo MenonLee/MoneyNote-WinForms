@@ -27,7 +27,7 @@ namespace ScheduleProject.Forms
         {
             Text = "MoneyNote - 지출 수정";
             BackColor = Color.FromArgb(248, 250, 252);
-            ClientSize = new Size(665, 535);
+            ClientSize = new Size(665, 565);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterParent;
@@ -55,7 +55,7 @@ namespace ScheduleProject.Forms
                 BackColor = Color.White,
                 BorderStyle = BorderStyle.FixedSingle,
                 Location = new Point(44, 126),
-                Size = new Size(577, 292)
+                Size = new Size(577, 320)
             };
 
             AddLabel(panelInput, "지출명", new Point(32, 24));
@@ -95,12 +95,12 @@ namespace ScheduleProject.Forms
             textMemo.Font = new Font("맑은 고딕", 10F);
             textMemo.Location = new Point(32, 250);
             textMemo.Multiline = true;
-            textMemo.Size = new Size(510, 32);
+            textMemo.Size = new Size(510, 34);
 
             checkIsFixed.AutoSize = true;
             checkIsFixed.Font = new Font("맑은 고딕", 10F);
             checkIsFixed.ForeColor = Color.FromArgb(51, 65, 85);
-            checkIsFixed.Location = new Point(32, 284);
+            checkIsFixed.Location = new Point(32, 290);
             checkIsFixed.Text = "매달 반복되는 고정 지출";
 
             panelInput.Controls.AddRange(new Control[]
@@ -114,9 +114,9 @@ namespace ScheduleProject.Forms
                 checkIsFixed
             });
 
-            ConfigurePrimaryButton(buttonSave, "수정 저장", new Point(430, 452), new Size(110, 36));
+            ConfigurePrimaryButton(buttonSave, "수정 저장", new Point(430, 486), new Size(110, 36));
             buttonSave.Click += buttonSave_Click;
-            ConfigureSecondaryButton(buttonCancel, "닫기", new Point(548, 452), new Size(73, 36));
+            ConfigureSecondaryButton(buttonCancel, "닫기", new Point(548, 486), new Size(73, 36));
             buttonCancel.Click += (_, _) => Close();
 
             Controls.AddRange(new Control[] { lblTitle, lblSubtitle, panelInput, buttonSave, buttonCancel });
@@ -142,7 +142,7 @@ namespace ScheduleProject.Forms
             button.BackColor = Color.FromArgb(37, 99, 235);
             button.FlatAppearance.BorderSize = 0;
             button.FlatStyle = FlatStyle.Flat;
-            button.Font = new Font("맑은 고딕", 10.5F, FontStyle.Regular);
+            button.Font = new Font("맑은 고딕", 11F, FontStyle.Bold);
             button.ForeColor = Color.White;
             button.UseVisualStyleBackColor = false;
         }
@@ -156,7 +156,7 @@ namespace ScheduleProject.Forms
             button.FlatAppearance.BorderColor = Color.FromArgb(148, 163, 184);
             button.FlatAppearance.BorderSize = 2;
             button.FlatStyle = FlatStyle.Flat;
-            button.Font = new Font("맑은 고딕", 10.5F, FontStyle.Regular);
+            button.Font = new Font("맑은 고딕", 11F, FontStyle.Bold);
             button.ForeColor = Color.FromArgb(51, 65, 85);
             button.UseVisualStyleBackColor = false;
         }
