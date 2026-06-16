@@ -20,6 +20,7 @@ namespace ScheduleProject.Forms
         private List<ExpenseItem> currentExpenses = new();
 
         public bool HasImportedExpenses { get; private set; }
+        public bool HasChangedExpenses { get; private set; }
 
         public FormExpenseList()
         {
@@ -104,12 +105,14 @@ namespace ScheduleProject.Forms
 
             dgvExpenses.Columns.Clear();
             AddGridColumn(nameof(ExpenseListRow.Date), "날짜", 100);
-            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 190, DataGridViewContentAlignment.MiddleLeft);
-            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 105, DataGridViewContentAlignment.MiddleCenter, "N0");
-            AddGridColumn(nameof(ExpenseListRow.Category), "카테고리", 95);
-            AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 105);
-            AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 65, DataGridViewContentAlignment.MiddleCenter);
-            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 235, DataGridViewContentAlignment.MiddleLeft);
+            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 170, DataGridViewContentAlignment.MiddleLeft, null, DataGridViewContentAlignment.MiddleLeft);
+            AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 95, DataGridViewContentAlignment.MiddleCenter, "N0");
+            AddGridColumn(nameof(ExpenseListRow.Category), "카테고리", 85);
+            AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 95);
+            AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 55, DataGridViewContentAlignment.MiddleCenter);
+            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 190, DataGridViewContentAlignment.MiddleLeft, null, DataGridViewContentAlignment.MiddleLeft);
+            AddButtonColumn("Edit", "수정", "수정", 60);
+            AddButtonColumn("Delete", "삭제", "삭제", 60);
         }
 
         private void WireEvents()
@@ -240,6 +243,7 @@ namespace ScheduleProject.Forms
 
                 LoadAllExpenses();
                 HasImportedExpenses = importedExpenses.Count > 0;
+                HasChangedExpenses = importedExpenses.Count > 0;
                 MessageBox.Show($"{importedExpenses.Count}건의 지출을 가져왔습니다.", "CSV 가져오기", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -256,6 +260,7 @@ namespace ScheduleProject.Forms
             dgvExpenses.DataSource = currentExpenses
                 .Select(expense => new ExpenseListRow
                 {
+                    Id = expense.Id,
                     Date = expense.ExpenseDate.ToString("yyyy-MM-dd"),
                     Title = expense.Title,
                     Amount = expense.Amount,
@@ -272,7 +277,8 @@ namespace ScheduleProject.Forms
             string headerText,
             int width,
             DataGridViewContentAlignment alignment = DataGridViewContentAlignment.MiddleCenter,
-            string? format = null)
+            string? format = null,
+            DataGridViewContentAlignment headerAlignment = DataGridViewContentAlignment.MiddleCenter)
         {
             var column = new DataGridViewTextBoxColumn
             {
@@ -284,12 +290,31 @@ namespace ScheduleProject.Forms
             };
 
             column.DefaultCellStyle.Alignment = alignment;
+            column.HeaderCell.Style.Alignment = headerAlignment;
 
             if (!string.IsNullOrWhiteSpace(format))
             {
                 column.DefaultCellStyle.Format = format;
             }
 
+            dgvExpenses.Columns.Add(column);
+        }
+
+        private void AddButtonColumn(string name, string headerText, string buttonText, int width)
+        {
+            var column = new DataGridViewButtonColumn
+            {
+                Name = name,
+                HeaderText = headerText,
+                Text = buttonText,
+                UseColumnTextForButtonValue = true,
+                Width = width,
+                SortMode = DataGridViewColumnSortMode.NotSortable,
+                FlatStyle = FlatStyle.Flat
+            };
+
+            column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvExpenses.Columns.Add(column);
         }
 
@@ -357,6 +382,7 @@ namespace ScheduleProject.Forms
 
         private sealed class ExpenseListRow
         {
+            public int Id { get; set; }
             public string Date { get; set; } = "";
             public string Title { get; set; } = "";
             public int Amount { get; set; }
@@ -378,7 +404,61 @@ namespace ScheduleProject.Forms
 
         private void dgvExpenses_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+            {
+                return;
+            }
 
+            if (dgvExpenses.Rows[e.RowIndex].DataBoundItem is not ExpenseListRow row)
+            {
+                return;
+            }
+
+            string columnName = dgvExpenses.Columns[e.ColumnIndex].Name;
+            if (columnName == "Edit")
+            {
+                EditExpense(row.Id);
+            }
+            else if (columnName == "Delete")
+            {
+                DeleteExpense(row.Id, row.Title);
+            }
+        }
+
+        private void EditExpense(int expenseId)
+        {
+            var expense = DatabaseHelper.GetExpenseById(expenseId);
+            if (expense == null)
+            {
+                MessageBox.Show("선택한 지출 내역을 찾을 수 없습니다.", "수정 실패", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                LoadAllExpenses();
+                return;
+            }
+
+            using var form = new FormEditExpense(expense);
+            if (form.ShowDialog(this) == DialogResult.OK)
+            {
+                HasChangedExpenses = true;
+                LoadAllExpenses();
+            }
+        }
+
+        private void DeleteExpense(int expenseId, string title)
+        {
+            var result = MessageBox.Show(
+                $"'{title}' 지출 내역을 삭제할까요?",
+                "삭제 확인",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+            DatabaseHelper.DeleteExpense(expenseId);
+            HasChangedExpenses = true;
+            LoadAllExpenses();
         }
     }
 }

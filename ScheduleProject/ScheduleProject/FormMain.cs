@@ -251,7 +251,7 @@ namespace ScheduleProject
             using (var form = new FormExpenseList())
             {
                 form.ShowDialog(this);
-                if (form.HasImportedExpenses)
+                if (form.HasChangedExpenses)
                 {
                     LoadDashboard();
                 }
