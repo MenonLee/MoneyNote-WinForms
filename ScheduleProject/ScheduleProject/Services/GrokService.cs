@@ -76,7 +76,7 @@ namespace ScheduleProject.Services
         public async Task<string> AnalyzeMonthlySpendingAsync(MonthlySpendingSummary summary)
         {
             string userText = BuildMonthlyAnalysisInput(summary);
-            string contentText = await CreateChatCompletionAsync(BuildAnalysisPrompt(), userText);
+            string contentText = await CreateChatCompletionAsync(BuildAnalysisPrompt(), userText, useJsonResponseFormat: false);
             return string.IsNullOrWhiteSpace(contentText)
                 ? "AI 소비 분석 결과를 읽을 수 없습니다."
                 : contentText.Trim();
@@ -93,7 +93,7 @@ namespace ScheduleProject.Services
             return result;
         }
 
-        private static async Task<string> CreateChatCompletionAsync(string systemPrompt, object userContent)
+        private static async Task<string> CreateChatCompletionAsync(string systemPrompt, object userContent, bool useJsonResponseFormat = true)
         {
             string apiKey = GetApiKey();
             if (string.IsNullOrWhiteSpace(apiKey))
@@ -110,9 +110,13 @@ namespace ScheduleProject.Services
                     new { role = "system", content = systemPrompt },
                     new { role = "user", content = userContent }
                 },
-                ["temperature"] = 0.1,
-                ["response_format"] = new { type = "json_object" }
+                ["temperature"] = 0.1
             };
+
+            if (useJsonResponseFormat)
+            {
+                requestBody["response_format"] = new { type = "json_object" };
+            }
 
             using var request = new HttpRequestMessage(HttpMethod.Post, GroqEndpoint)
             {

@@ -57,6 +57,8 @@ namespace ScheduleProject.Forms
             dgvFixedExpenses.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dgvFixedExpenses.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvFixedExpenses.EnableHeadersVisualStyles = false;
+            dgvFixedExpenses.ScrollBars = ScrollBars.Vertical;
+            dgvFixedExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             AddTextColumn(nameof(FixedExpenseItem.Title), "지출명", 150, DataGridViewContentAlignment.MiddleLeft);
             AddTextColumn(nameof(FixedExpenseItem.Amount), "금액", 105, DataGridViewContentAlignment.MiddleRight, "N0");
@@ -65,6 +67,28 @@ namespace ScheduleProject.Forms
             AddTextColumn(nameof(FixedExpenseItem.PaymentMethod), "결제수단", 105, DataGridViewContentAlignment.MiddleCenter);
             AddTextColumn(nameof(FixedExpenseItem.Memo), "메모", 180, DataGridViewContentAlignment.MiddleLeft);
             AddDeleteButtonColumn();
+            FitGridColumnsToGridWidth();
+        }
+
+        private void FitGridColumnsToGridWidth()
+        {
+            SetColumnFill(nameof(FixedExpenseItem.Title), 150, 120);
+            SetColumnFill(nameof(FixedExpenseItem.Amount), 90, 80);
+            SetColumnFill(nameof(FixedExpenseItem.DayOfMonth), 65, 55);
+            SetColumnFill(nameof(FixedExpenseItem.Category), 100, 80);
+            SetColumnFill(nameof(FixedExpenseItem.PaymentMethod), 110, 90);
+            SetColumnFill(nameof(FixedExpenseItem.Memo), 190, 120);
+            SetColumnFill("DeleteAction", 55, 48);
+        }
+
+        private void SetColumnFill(string columnName, float fillWeight, int minimumWidth)
+        {
+            if (dgvFixedExpenses.Columns[columnName] is DataGridViewColumn column)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                column.FillWeight = fillWeight;
+                column.MinimumWidth = minimumWidth;
+            }
         }
 
         private void AddTextColumn(string propertyName, string headerText, int width, DataGridViewContentAlignment alignment, string? format = null)

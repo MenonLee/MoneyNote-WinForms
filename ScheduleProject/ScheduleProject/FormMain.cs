@@ -22,7 +22,7 @@ namespace ScheduleProject
             LoadDashboard();
         }
 
-        private void LoadDashboard()
+        private void LoadDashboard(bool refreshAiComment = false)
         {
             int year = DateTime.Today.Year;
             int month = DateTime.Today.Month;
@@ -46,21 +46,22 @@ namespace ScheduleProject
             UpdateRecentExpenses(recentExpenses);
             UpdateCategorySummary(categorySpending);
 
-            string? aiComment = DatabaseHelper.GetLastAiAnalysis(year, month);
-            if (string.IsNullOrWhiteSpace(aiComment))
+            var summary = new MonthlySpendingSummary
             {
-                var summary = new MonthlySpendingSummary
-                {
-                    Year = year,
-                    Month = month,
-                    TotalExpenseAmount = monthlyExpense,
-                    MonthlyBudget = monthlyBudget,
-                    FixedExpenseAmount = fixedExpense,
-                    CategorySpending = categorySpending,
-                    CategoryBudgets = categoryBudgets,
-                    RecentExpenses = recentExpenses
-                };
-                GenerateAiCommentIfNeeded(summary);
+                Year = year,
+                Month = month,
+                TotalExpenseAmount = monthlyExpense,
+                MonthlyBudget = monthlyBudget,
+                FixedExpenseAmount = fixedExpense,
+                CategorySpending = categorySpending,
+                CategoryBudgets = categoryBudgets,
+                RecentExpenses = recentExpenses
+            };
+
+            string? aiComment = DatabaseHelper.GetLastAiAnalysis(year, month);
+            if (refreshAiComment || string.IsNullOrWhiteSpace(aiComment))
+            {
+                _ = GenerateAiCommentIfNeededAsync(summary);
             }
             else
             {
@@ -68,7 +69,7 @@ namespace ScheduleProject
             }
         }
 
-        private async void GenerateAiCommentIfNeeded(MonthlySpendingSummary summary)
+        private async Task GenerateAiCommentIfNeededAsync(MonthlySpendingSummary summary)
         {
             if (isGeneratingAiComment)
             {
@@ -82,6 +83,7 @@ namespace ScheduleProject
             }
 
             isGeneratingAiComment = true;
+            SetDashboardRefreshState(false);
             lblAiCommentText.Text = "AI 소비 코멘트 생성 중...";
 
             try
@@ -103,7 +105,15 @@ namespace ScheduleProject
             finally
             {
                 isGeneratingAiComment = false;
+                SetDashboardRefreshState(true);
             }
+        }
+
+        private void SetDashboardRefreshState(bool enabled)
+        {
+            buttonDashboardRefresh.Enabled = enabled;
+            buttonDashboardRefresh.Text = enabled ? "새로고침" : "갱신 중";
+            Cursor = enabled ? Cursors.Default : Cursors.WaitCursor;
         }
 
         private void UpdateRecentExpenses(List<ExpenseItem> recentExpenses)
@@ -285,6 +295,11 @@ namespace ScheduleProject
                 form.ShowDialog(this);
             }
             LoadDashboard();
+        }
+
+        private void buttonDashboardRefresh_Click(object sender, EventArgs e)
+        {
+            LoadDashboard(refreshAiComment: true);
         }
 
         private void buttonExit_Click(object sender, EventArgs e)

@@ -85,7 +85,7 @@ namespace ScheduleProject.Forms
             panelInput.Controls.Add(lblExpenseTitle);
             panelInput.Location = new Point(32, 104);
             panelInput.Name = "panelInput";
-            panelInput.Size = new Size(796, 162);
+            panelInput.Size = new Size(756, 162);
             panelInput.TabIndex = 2;
             // 
             // btnAdd
@@ -95,7 +95,7 @@ namespace ScheduleProject.Forms
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("맑은 고딕", 10F, FontStyle.Bold, GraphicsUnit.Point, 129);
             btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(676, 108);
+            btnAdd.Location = new Point(636, 108);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(88, 34);
             btnAdd.TabIndex = 13;
@@ -123,7 +123,7 @@ namespace ScheduleProject.Forms
             txtMemo.Location = new Point(444, 48);
             txtMemo.Name = "txtMemo";
             txtMemo.PlaceholderText = "메모";
-            txtMemo.Size = new Size(320, 25);
+            txtMemo.Size = new Size(280, 25);
             txtMemo.TabIndex = 11;
             // 
             // lblMemo
@@ -251,7 +251,7 @@ namespace ScheduleProject.Forms
             panelList.Controls.Add(lblListTitle);
             panelList.Location = new Point(32, 284);
             panelList.Name = "panelList";
-            panelList.Size = new Size(796, 230);
+            panelList.Size = new Size(756, 230);
             panelList.TabIndex = 3;
             // 
             // dgvFixedExpenses
@@ -271,7 +271,7 @@ namespace ScheduleProject.Forms
             dgvFixedExpenses.RowHeadersVisible = false;
             dgvFixedExpenses.RowTemplate.Height = 32;
             dgvFixedExpenses.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFixedExpenses.Size = new Size(746, 154);
+            dgvFixedExpenses.Size = new Size(706, 154);
             dgvFixedExpenses.TabIndex = 1;
             // 
             // lblListTitle
@@ -290,7 +290,7 @@ namespace ScheduleProject.Forms
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(248, 250, 252);
-            ClientSize = new Size(860, 540);
+            ClientSize = new Size(820, 540);
             Controls.Add(panelList);
             Controls.Add(panelInput);
             Controls.Add(lblSubtitle);

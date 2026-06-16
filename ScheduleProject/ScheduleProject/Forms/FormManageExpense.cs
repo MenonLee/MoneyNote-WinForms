@@ -91,7 +91,8 @@ namespace ScheduleProject
             if (_selectedId < 0) return;
             if (!ValidateInput(out int amount)) return;
 
-            DatabaseHelper.UpdateExpense(new ExpenseItem
+            ExpenseItem? existingExpense = DatabaseHelper.GetExpenseById(_selectedId);
+            var expense = new ExpenseItem
             {
                 Id = _selectedId,
                 Title = textTitle.Text.Trim(),
@@ -100,8 +101,20 @@ namespace ScheduleProject
                 PaymentMethod = comboPaymentMethod.Text,
                 ExpenseDate = dateExpense.Value.Date,
                 Memo = textMemo.Text.Trim(),
-                IsFixed = checkIsFixed.Checked
-            });
+                IsFixed = checkIsFixed.Checked,
+                FixedExpenseRefId = checkIsFixed.Checked ? existingExpense?.FixedExpenseRefId : null
+            };
+
+            if (expense.IsFixed)
+            {
+                expense.FixedExpenseRefId = DatabaseHelper.SaveFixedExpenseFromExpense(expense);
+            }
+            else if (existingExpense?.FixedExpenseRefId.HasValue == true)
+            {
+                DatabaseHelper.DeleteFixedExpense(existingExpense.FixedExpenseRefId.Value);
+            }
+
+            DatabaseHelper.UpdateExpense(expense);
 
             MessageBox.Show("지출 내역이 수정되었습니다.", "수정 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadExpenses();
