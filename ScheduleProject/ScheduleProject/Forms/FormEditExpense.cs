@@ -192,6 +192,12 @@ namespace ScheduleProject.Forms
             expense.ExpenseDate = dateExpense.Value.Date;
             expense.Memo = textMemo.Text.Trim();
             expense.IsFixed = checkIsFixed.Checked;
+            expense.FixedExpenseRefId = checkIsFixed.Checked ? expense.FixedExpenseRefId : null;
+
+            if (expense.IsFixed)
+            {
+                expense.FixedExpenseRefId = DatabaseHelper.SaveFixedExpenseFromExpense(expense);
+            }
 
             DatabaseHelper.UpdateExpense(expense);
             MessageBox.Show("지출 내역을 수정했습니다.", "수정 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
