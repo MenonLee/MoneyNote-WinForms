@@ -192,11 +192,16 @@ namespace ScheduleProject.Forms
             expense.ExpenseDate = dateExpense.Value.Date;
             expense.Memo = textMemo.Text.Trim();
             expense.IsFixed = checkIsFixed.Checked;
-            expense.FixedExpenseRefId = checkIsFixed.Checked ? expense.FixedExpenseRefId : null;
+            int? existingFixedExpenseRefId = expense.FixedExpenseRefId;
+            expense.FixedExpenseRefId = checkIsFixed.Checked ? existingFixedExpenseRefId : null;
 
             if (expense.IsFixed)
             {
                 expense.FixedExpenseRefId = DatabaseHelper.SaveFixedExpenseFromExpense(expense);
+            }
+            else if (existingFixedExpenseRefId.HasValue)
+            {
+                DatabaseHelper.DeleteFixedExpense(existingFixedExpenseRefId.Value);
             }
 
             DatabaseHelper.UpdateExpense(expense);

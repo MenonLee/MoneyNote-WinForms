@@ -109,6 +109,10 @@ namespace ScheduleProject
             {
                 expense.FixedExpenseRefId = DatabaseHelper.SaveFixedExpenseFromExpense(expense);
             }
+            else if (existingExpense?.FixedExpenseRefId.HasValue == true)
+            {
+                DatabaseHelper.DeleteFixedExpense(existingExpense.FixedExpenseRefId.Value);
+            }
 
             DatabaseHelper.UpdateExpense(expense);
 
