@@ -14,6 +14,7 @@ namespace ScheduleProject
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             DatabaseHelper.InitializeDatabase();
+            DatabaseHelper.ProcessMonthlyFixedExpenses(); // 고정지출 자동화 실행
             Application.Run(new FormMain());
         }
     }

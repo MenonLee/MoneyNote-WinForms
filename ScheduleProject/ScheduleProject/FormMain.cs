@@ -114,7 +114,10 @@ namespace ScheduleProject
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             ResetMenuColors();
-            MessageBox.Show("고정지출 관리 화면 연결 예정");
+            using (var form = new ScheduleProject.Forms.FormFixedExpense())
+            {
+                form.ShowDialog(this);
+            }
         }
 
         private void buttonStats_Click(object sender, EventArgs e)
