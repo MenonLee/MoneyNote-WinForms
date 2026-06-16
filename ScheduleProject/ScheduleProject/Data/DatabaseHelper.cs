@@ -567,32 +567,6 @@ namespace ScheduleProject.Data
             return ExecuteScalarInt("SELECT IFNULL(SUM(Amount), 0) FROM FixedExpenses WHERE IsActive = 1");
         }
 
-        public static void UpdateFixedExpense(FixedExpenseItem fixedExpense)
-        {
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                string updateCommand = @"
-                    UPDATE FixedExpenses 
-                    SET Title = @Title, Amount = @Amount, Category = @Category, 
-                        PaymentMethod = @PaymentMethod, DayOfMonth = @DayOfMonth, 
-                        Memo = @Memo, IsActive = @IsActive 
-                    WHERE Id = @Id";
-                using (var command = new SqliteCommand(updateCommand, connection))
-                {
-                    command.Parameters.AddWithValue("@Title", fixedExpense.Title);
-                    command.Parameters.AddWithValue("@Amount", fixedExpense.Amount);
-                    command.Parameters.AddWithValue("@Category", ToDbValue(fixedExpense.Category));
-                    command.Parameters.AddWithValue("@PaymentMethod", ToDbValue(fixedExpense.PaymentMethod));
-                    command.Parameters.AddWithValue("@DayOfMonth", fixedExpense.DayOfMonth);
-                    command.Parameters.AddWithValue("@Memo", ToDbValue(fixedExpense.Memo));
-                    command.Parameters.AddWithValue("@IsActive", fixedExpense.IsActive ? 1 : 0);
-                    command.Parameters.AddWithValue("@Id", fixedExpense.Id);
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-
         public static void DeleteFixedExpense(int id)
         {
             using (var connection = new SqliteConnection(connectionString))
