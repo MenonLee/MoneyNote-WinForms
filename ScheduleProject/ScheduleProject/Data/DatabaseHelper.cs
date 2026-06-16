@@ -440,7 +440,7 @@ namespace ScheduleProject.Data
             return budgets;
         }
 
-        public static void AddFixedExpense(FixedExpenseItem fixedExpense)
+        public static int AddFixedExpense(FixedExpenseItem fixedExpense)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -461,6 +461,66 @@ namespace ScheduleProject.Data
                     command.Parameters.AddWithValue("@Memo", ToDbValue(fixedExpense.Memo));
                     command.Parameters.AddWithValue("@IsActive", fixedExpense.IsActive ? 1 : 0);
                     command.Parameters.AddWithValue("@CreatedAt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    command.ExecuteNonQuery();
+                }
+
+                using (var idCommand = new SqliteCommand("SELECT last_insert_rowid()", connection))
+                {
+                    return Convert.ToInt32(idCommand.ExecuteScalar());
+                }
+            }
+        }
+
+        public static int SaveFixedExpenseFromExpense(ExpenseItem expense)
+        {
+            var fixedExpense = new FixedExpenseItem
+            {
+                Id = expense.FixedExpenseRefId ?? 0,
+                Title = expense.Title,
+                Amount = expense.Amount,
+                Category = expense.Category,
+                PaymentMethod = expense.PaymentMethod,
+                DayOfMonth = expense.ExpenseDate.Day,
+                Memo = expense.Memo,
+                IsActive = true,
+                CreatedAt = DateTime.Now
+            };
+
+            if (fixedExpense.Id > 0 && FixedExpenseExists(fixedExpense.Id))
+            {
+                UpdateFixedExpense(fixedExpense);
+                return fixedExpense.Id;
+            }
+
+            return AddFixedExpense(fixedExpense);
+        }
+
+        public static void UpdateFixedExpense(FixedExpenseItem fixedExpense)
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string updateCommand = @"
+                    UPDATE FixedExpenses
+                    SET Title = @Title,
+                        Amount = @Amount,
+                        Category = @Category,
+                        PaymentMethod = @PaymentMethod,
+                        DayOfMonth = @DayOfMonth,
+                        Memo = @Memo,
+                        IsActive = @IsActive
+                    WHERE Id = @Id";
+
+                using (var command = new SqliteCommand(updateCommand, connection))
+                {
+                    command.Parameters.AddWithValue("@Title", fixedExpense.Title);
+                    command.Parameters.AddWithValue("@Amount", fixedExpense.Amount);
+                    command.Parameters.AddWithValue("@Category", ToDbValue(fixedExpense.Category));
+                    command.Parameters.AddWithValue("@PaymentMethod", ToDbValue(fixedExpense.PaymentMethod));
+                    command.Parameters.AddWithValue("@DayOfMonth", fixedExpense.DayOfMonth);
+                    command.Parameters.AddWithValue("@Memo", ToDbValue(fixedExpense.Memo));
+                    command.Parameters.AddWithValue("@IsActive", fixedExpense.IsActive ? 1 : 0);
+                    command.Parameters.AddWithValue("@Id", fixedExpense.Id);
                     command.ExecuteNonQuery();
                 }
             }
@@ -594,6 +654,14 @@ namespace ScheduleProject.Data
                     command.Parameters.AddWithValue("@Year", year.ToString());
                     command.Parameters.AddWithValue("@Month", month.ToString("00"));
                 }
+            ) > 0;
+        }
+
+        private static bool FixedExpenseExists(int fixedExpenseId)
+        {
+            return ExecuteScalarInt(
+                "SELECT COUNT(*) FROM FixedExpenses WHERE Id = @Id",
+                command => command.Parameters.AddWithValue("@Id", fixedExpenseId)
             ) > 0;
         }
 

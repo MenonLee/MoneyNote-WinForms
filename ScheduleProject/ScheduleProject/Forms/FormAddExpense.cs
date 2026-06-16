@@ -98,6 +98,11 @@ namespace ScheduleProject
                 CreatedAt = DateTime.Now
             };
 
+            if (expense.IsFixed)
+            {
+                expense.FixedExpenseRefId = DatabaseHelper.SaveFixedExpenseFromExpense(expense);
+            }
+
             DatabaseHelper.AddExpense(expense);
             MessageBox.Show("지출 내역이 저장되었습니다.", "저장 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
             DialogResult = DialogResult.OK;
