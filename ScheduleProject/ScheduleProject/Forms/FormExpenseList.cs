@@ -267,7 +267,7 @@ namespace ScheduleProject.Forms
                     Amount = expense.Amount,
                     Category = expense.Category,
                     PaymentMethod = expense.PaymentMethod,
-                    Fixed = expense.IsFixed ? "예" : "아니오",
+                    Fixed = expense.IsFixed ? "O" : "X",
                     Memo = expense.Memo
                 })
                 .ToList();
