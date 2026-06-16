@@ -58,6 +58,7 @@ namespace ScheduleProject.Forms
             dgvFixedExpenses.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvFixedExpenses.EnableHeadersVisualStyles = false;
             dgvFixedExpenses.ScrollBars = ScrollBars.Vertical;
+            dgvFixedExpenses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             AddTextColumn(nameof(FixedExpenseItem.Title), "지출명", 150, DataGridViewContentAlignment.MiddleLeft);
             AddTextColumn(nameof(FixedExpenseItem.Amount), "금액", 105, DataGridViewContentAlignment.MiddleRight, "N0");
@@ -66,25 +67,27 @@ namespace ScheduleProject.Forms
             AddTextColumn(nameof(FixedExpenseItem.PaymentMethod), "결제수단", 105, DataGridViewContentAlignment.MiddleCenter);
             AddTextColumn(nameof(FixedExpenseItem.Memo), "메모", 180, DataGridViewContentAlignment.MiddleLeft);
             AddDeleteButtonColumn();
-            FitGridColumnsToCompactWidth();
+            FitGridColumnsToGridWidth();
         }
 
-        private void FitGridColumnsToCompactWidth()
+        private void FitGridColumnsToGridWidth()
         {
-            SetColumnWidth(nameof(FixedExpenseItem.Title), 140);
-            SetColumnWidth(nameof(FixedExpenseItem.Amount), 90);
-            SetColumnWidth(nameof(FixedExpenseItem.DayOfMonth), 60);
-            SetColumnWidth(nameof(FixedExpenseItem.Category), 95);
-            SetColumnWidth(nameof(FixedExpenseItem.PaymentMethod), 95);
-            SetColumnWidth(nameof(FixedExpenseItem.Memo), 165);
-            SetColumnWidth("DeleteAction", 56);
+            SetColumnFill(nameof(FixedExpenseItem.Title), 150, 120);
+            SetColumnFill(nameof(FixedExpenseItem.Amount), 90, 80);
+            SetColumnFill(nameof(FixedExpenseItem.DayOfMonth), 65, 55);
+            SetColumnFill(nameof(FixedExpenseItem.Category), 100, 80);
+            SetColumnFill(nameof(FixedExpenseItem.PaymentMethod), 110, 90);
+            SetColumnFill(nameof(FixedExpenseItem.Memo), 190, 120);
+            SetColumnFill("DeleteAction", 55, 48);
         }
 
-        private void SetColumnWidth(string columnName, int width)
+        private void SetColumnFill(string columnName, float fillWeight, int minimumWidth)
         {
             if (dgvFixedExpenses.Columns[columnName] is DataGridViewColumn column)
             {
-                column.Width = width;
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                column.FillWeight = fillWeight;
+                column.MinimumWidth = minimumWidth;
             }
         }
 
