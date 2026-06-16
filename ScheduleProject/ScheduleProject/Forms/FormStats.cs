@@ -31,8 +31,8 @@ namespace ScheduleProject
             lblTitle.Location = new Point(44, 28);
             lblTitle.Size = new Size(260, 60);
             lblSubtitle.AutoSize = false;
-            lblSubtitle.Location = new Point(47, 84);
-            lblSubtitle.Size = new Size(560, 26);
+            lblSubtitle.Location = new Point(47, 74);
+            lblSubtitle.Size = new Size(620, 34);
             lblCategoryTitle.Visible = false;
             dgvCategory.Visible = false;
             panelCategory.Paint += panelCategory_Paint;
