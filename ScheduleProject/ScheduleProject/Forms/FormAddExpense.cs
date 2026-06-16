@@ -6,7 +6,7 @@ namespace ScheduleProject
 {
     public partial class FormAddExpense : Form
     {
-        private readonly GeminiService geminiService = new GeminiService();
+        private readonly GrokService grokService = new GrokService();
 
         public FormAddExpense()
         {
@@ -26,13 +26,35 @@ namespace ScheduleProject
                 return;
             }
 
+            await RunAiAnalysisAsync(() => grokService.ParseNaturalExpenseAsync(naturalText), "AI 분석 결과를 입력칸에 채웠습니다.");
+        }
+
+        private async void buttonReceiptAi_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog dialog = new OpenFileDialog
+            {
+                Title = "영수증 사진 선택",
+                Filter = "이미지 파일|*.jpg;*.jpeg;*.png;*.gif;*.webp|모든 파일|*.*",
+                Multiselect = false
+            };
+
+            if (dialog.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
+
+            await RunAiAnalysisAsync(() => grokService.ParseReceiptImageAsync(dialog.FileName), "영수증 분석 결과를 입력칸에 채웠습니다.");
+        }
+
+        private async Task RunAiAnalysisAsync(Func<Task<NaturalExpenseResult>> analyze, string successMessage)
+        {
             SetAiLoadingState(true);
 
             try
             {
-                NaturalExpenseResult result = await geminiService.ParseNaturalExpenseAsync(naturalText);
+                NaturalExpenseResult result = await analyze();
                 ApplyAiResult(result);
-                MessageBox.Show("AI 분석 결과를 입력칸에 채웠습니다. 저장 전에 내용을 확인해 주세요.", "AI 분석 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(successMessage + " 저장 전에 내용을 확인해 주세요.", "AI 분석 완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -75,6 +97,7 @@ namespace ScheduleProject
         private void SetAiLoadingState(bool isLoading)
         {
             buttonAnalyzeAi.Enabled = !isLoading;
+            buttonReceiptAi.Enabled = !isLoading;
             buttonAnalyzeAi.Text = isLoading ? "분석 중..." : "AI 분석";
             Cursor = isLoading ? Cursors.WaitCursor : Cursors.Default;
         }
@@ -129,16 +152,6 @@ namespace ScheduleProject
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void lblCategory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textAmount_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
