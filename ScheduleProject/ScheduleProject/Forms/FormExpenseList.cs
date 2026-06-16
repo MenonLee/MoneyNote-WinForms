@@ -104,12 +104,12 @@ namespace ScheduleProject.Forms
 
             dgvExpenses.Columns.Clear();
             AddGridColumn(nameof(ExpenseListRow.Date), "날짜", 100);
-            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 190);
+            AddGridColumn(nameof(ExpenseListRow.Title), "지출명", 190, DataGridViewContentAlignment.MiddleLeft);
             AddGridColumn(nameof(ExpenseListRow.Amount), "금액", 105, DataGridViewContentAlignment.MiddleCenter, "N0");
             AddGridColumn(nameof(ExpenseListRow.Category), "카테고리", 95);
             AddGridColumn(nameof(ExpenseListRow.PaymentMethod), "결제수단", 105);
             AddGridColumn(nameof(ExpenseListRow.Fixed), "고정", 65, DataGridViewContentAlignment.MiddleCenter);
-            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 235);
+            AddGridColumn(nameof(ExpenseListRow.Memo), "메모", 235, DataGridViewContentAlignment.MiddleLeft);
         }
 
         private void WireEvents()
